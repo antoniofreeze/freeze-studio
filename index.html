@@ -649,6 +649,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <div class="campo-testo"><label for="f-att">Attività</label><input id="f-att" name="attivita" required></div>
       <div class="campo-testo largo"><label for="f-con">Come ti contattiamo</label><input id="f-con" name="contatto" required placeholder="Email o telefono"></div>
       <div class="campo-testo largo"><label for="f-msg">Cosa deve cambiare</label><textarea id="f-msg" name="messaggio" required></textarea></div>
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="campo-testo largo"><button class="bottone" type="submit">Manda</button></div>
       <p class="esito" id="esito" role="status"></p>
     </form>
@@ -959,12 +960,34 @@ addEventListener('scroll',()=>{nav.classList.toggle('solida',scrollY>50)},{passi
 addEventListener('visibilitychange',()=>document.body.classList.toggle('pausa',document.hidden));
 
 /* ══════════ modulo ══════════ */
-$('#modulo').addEventListener('submit',e=>{
-  e.preventDefault();
-  const f=e.target;
+/* finché INVIO resta il segnaposto, il modulo apre la mail come prima */
+const INVIO='https://formspree.io/f/METTI-QUI-ID';
+function apriMail(f){
   const corpo=encodeURIComponent('Attività: '+f.attivita.value+'\nContatto: '+f.contatto.value+'\n\n'+f.messaggio.value);
   location.href='mailto:info@freezestudio.it?subject='+encodeURIComponent('Richiesta da '+f.nome.value)+'&body='+corpo;
-  $('#esito').textContent='Ti abbiamo aperto la mail già scritta: premi invia dal tuo programma di posta.';
+}
+$('#modulo').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=e.target, esito=$('#esito'), bottone=f.querySelector('button');
+  if(INVIO.includes('METTI-QUI-ID')){
+    apriMail(f);
+    esito.textContent='Ti abbiamo aperto la mail già scritta: premi invia dal tuo programma di posta.';
+    return;
+  }
+  const dati=new FormData(f);
+  dati.append('_subject','Richiesta dal sito: '+f.nome.value);
+  bottone.disabled=true;bottone.textContent='Sto mandando…';
+  try{
+    const r=await fetch(INVIO,{method:'POST',body:dati,headers:{Accept:'application/json'}});
+    if(!r.ok)throw new Error();
+    f.reset();
+    bottone.textContent='Mandato';
+    esito.textContent='Ricevuto. Ti rispondiamo con la nostra lettura del problema.';
+  }catch(_){
+    bottone.disabled=false;bottone.textContent='Manda';
+    apriMail(f);
+    esito.textContent="L'invio non è passato: ti abbiamo aperto la mail già pronta, premi invia da lì.";
+  }
 });
 
 /* ══════════ movimento ridotto dal vivo ══════════ */
