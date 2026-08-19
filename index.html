@@ -961,7 +961,7 @@ addEventListener('visibilitychange',()=>document.body.classList.toggle('pausa',d
 
 /* ══════════ modulo ══════════ */
 /* finché INVIO resta il segnaposto, il modulo apre la mail come prima */
-const INVIO='https://formspree.io/f/METTI-QUI-ID';
+const INVIO='https://formspree.io/f/xzepyvqw';
 function apriMail(f){
   const corpo=encodeURIComponent('Attività: '+f.attivita.value+'\nContatto: '+f.contatto.value+'\n\n'+f.messaggio.value);
   location.href='mailto:info@freezestudio.it?subject='+encodeURIComponent('Richiesta da '+f.nome.value)+'&body='+corpo;
