@@ -978,6 +978,16 @@ matchMedia('(prefers-reduced-motion:reduce)').addEventListener('change',e=>{
   }
   modoEroe();
 });
+
+/* l'ancora serve solo per il salto: poi l'indirizzo torna pulito e un
+   ricaricamento riparte dall'alto invece che dall'ultima sezione */
+const navigazione=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+if(navigazione&&navigazione.type==='reload'&&'scrollRestoration' in history){
+  history.scrollRestoration='manual';scrollTo(0,0);
+}
+function pulisciAncora(){setTimeout(()=>history.replaceState(null,'',location.pathname+location.search),80)}
+addEventListener('load',()=>{if(location.hash)pulisciAncora()});
+addEventListener('hashchange',pulisciAncora);
 </script>
 <script src="assets/linea.js" defer></script>
 <script src="assets/dossier.js" defer></script>
