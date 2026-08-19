@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Freeze Studio | Otto casi studio, otto numeri veri</title>
+<meta name="description" content="Freeze Studio parte dal problema, non dallo strumento. Otto casi studio con numeri veri: un sindaco eletto, più 37% di vendite online, più 25% di coperti.">
+<meta name="theme-color" content="#0B0D12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0D12'/%3E%3Crect x='5' y='14.5' width='22' height='3.4' rx='1.7' fill='%23F62188'/%3E%3C/svg%3E">
+<!-- DEPLOY STEP: sostituire con l'URL assoluto del sito live -->
+<meta property="og:title" content="Freeze Studio | Otto casi studio, otto numeri veri">
+<meta property="og:description" content="Partiamo dal problema, non dallo strumento. E mostriamo cosa è cambiato.">
+<meta property="og:type" content="website">
+<!-- DEPLOY STEP: aggiungere og:url e og:image assoluti quando il sito e online -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Instrument+Sans:wght@400;500&family=Azeret+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#0B0D12; --panel:#12151C; --carta:#EFF1F5; --inchiostro:#0B0D12;
+  --accent:#F62188; --accent-hover:#FF4DA0; --accent-muted:rgba(246,33,136,.20);
+  --accent-scuro:#C2005F;
+  --ghiaccio:#BFD9E8;
+  --text-primary:#EDF1F7; --text-secondary:#98A1B0;
+  --linea:rgba(191,217,232,.14); --linea-chiara:rgba(11,13,18,.13);
+  --display:'Archivo',system-ui,sans-serif;
+  --testo:'Instrument Sans',system-ui,sans-serif;
+  --mono:'Azeret Mono',ui-monospace,monospace;
+  --e1:cubic-bezier(.22,.68,.24,1); --e2:cubic-bezier(.4,0,.2,1);
+  --tshadow:0 1px 2px rgba(4,5,9,.95),0 3px 12px rgba(4,5,9,.78),0 10px 44px rgba(4,5,9,.8);
+  --max:1380px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden;overflow-x:clip}
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--text-primary);font-family:var(--testo);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body.bloccato{overflow:hidden}
+img,video{display:block;max-width:100%}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.salta{position:absolute;left:-9999px;top:0;background:var(--accent);color:#fff;padding:12px 18px;z-index:200;border-radius:0 0 8px 0}
+.salta:focus{left:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,4.4vw,72px)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.occhiello{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--text-secondary)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:900;letter-spacing:-.042em;line-height:1.0;text-wrap:balance}
+.h-sez{font-size:clamp(30px,5.2vw,72px);margin-top:20px}
+.lede{margin-top:20px;font-size:clamp(16px,1.45vw,19px);line-height:1.68;color:var(--text-secondary);max-width:56ch}
+
+/* ═════ ambiente fisso ═════ */
+.ambiente{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 90% 60% at 50% 8%,rgba(246,33,136,.07),transparent 62%),
+             radial-gradient(ellipse 70% 50% at 12% 88%,rgba(191,217,232,.05),transparent 60%);
+  animation:deriva 72s ease-in-out infinite -12s}
+@keyframes deriva{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(0,-2.5%,0) scale(1.06)}}
+main,nav,footer{position:relative;z-index:1}
+
+/* ═════ nav ═════ */
+nav{position:fixed;inset:0 0 auto;z-index:60;border-bottom:1px solid transparent;transition:background .45s var(--e2),border-color .45s,backdrop-filter .45s}
+nav.solida{background:rgba(11,13,18,.8);backdrop-filter:blur(18px) saturate(1.5);border-bottom-color:var(--linea)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+.marchio{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.05em;text-decoration:none}
+.marchio i{display:block;width:22px;height:3px;background:var(--accent);border-radius:2px}
+.menu{display:flex;gap:6px;list-style:none}
+.menu a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:10px 14px;border-radius:99px;opacity:.72;transition:.3s var(--e2)}
+.menu a:hover{opacity:1;background:rgba(191,217,232,.09)}
+
+/* ═════ EROE: LA LINEA ═════ */
+#eroe{position:relative;height:620vh}
+.palco{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--canvas)}
+#tela{position:absolute;inset:0;display:block}
+.stazione{position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;opacity:0;visibility:hidden;text-shadow:var(--tshadow)}
+.stazione .col{position:relative;z-index:2;width:min(43%,530px);padding:0 clamp(20px,4vw,66px)}
+.stazione.sx{justify-content:flex-start}
+.stazione.dx{justify-content:flex-end}
+.stazione.dx .col{text-align:right}
+.stazione.centro{justify-content:center}
+.stazione.centro{align-items:flex-start}
+.stazione.centro .col{width:min(92%,880px);text-align:center;margin-top:52vh}
+.stazione.sx::before{content:"";position:absolute;inset:0 54% 0 -8%;pointer-events:none;
+  opacity:calc(.28 + .72*var(--k,1));
+  background:radial-gradient(ellipse 74% 58% at 44% 50%,rgba(4,5,10,.74),rgba(4,5,10,.44) 48%,rgba(4,5,10,0) 78%)}
+.stazione.dx::before{content:"";position:absolute;inset:0 -8% 0 54%;pointer-events:none;
+  opacity:calc(.28 + .72*var(--k,1));
+  background:radial-gradient(ellipse 74% 58% at 56% 50%,rgba(4,5,10,.74),rgba(4,5,10,.44) 48%,rgba(4,5,10,0) 78%)}
+.stazione.centro::before{content:"";position:absolute;inset:-4%;pointer-events:none;
+  opacity:calc(.28 + .72*var(--k,1));
+  background:radial-gradient(ellipse 78% 40% at 50% 72%,rgba(4,5,10,.80),rgba(4,5,10,0) 78%)}
+.frase{font-family:var(--display);font-weight:900;letter-spacing:-.045em;line-height:1.06;font-size:clamp(25px,3.5vw,52px)}
+.stazione.centro .frase{font-size:clamp(25px,3.5vw,50px)}
+.sotto{margin-top:20px;font-family:var(--testo);font-weight:500;font-size:clamp(15px,1.45vw,19px);line-height:1.55;color:#D3DAE4}
+.stazione.centro .sotto{margin-inline:auto;max-width:46ch}
+.azione{margin-top:26px;display:flex;gap:13px;flex-wrap:wrap}
+.stazione.centro .azione{justify-content:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.w{display:inline-block;white-space:pre}
+.c{display:inline-block}
+.b-scatter .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);
+  transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px))) rotate(calc((1 - var(--kc))*var(--jr,0deg)))}
+.b-drift .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*-26px))}
+.b-snap .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);opacity:var(--kc);transform:translateX(calc((1 - var(--kc))*var(--jx,0px)))}
+.b-rise .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);transform:translateY(calc((1 - var(--kc))*30px))}
+.b-rise .sotto{--ks:clamp(0,(var(--k,0) - .58)*3.2,1);opacity:var(--ks);transform:translateY(calc((1 - var(--ks))*18px))}
+.b-rise .azione{--kb:clamp(0,(var(--k,0) - .74)*4.2,1);opacity:var(--kb);transform:translateY(calc((1 - var(--kb))*16px))}
+
+
+
+/* ── il cursore del marchio ── */
+@media (pointer:fine){
+  html.cursore-nostro,html.cursore-nostro *{cursor:none}
+  html.cursore-nostro input,html.cursore-nostro textarea{cursor:text}
+}
+#cursore{position:fixed;left:0;top:0;z-index:300;pointer-events:none;width:30px;height:38px;
+  opacity:0;transition:opacity .25s var(--e2)}
+#cursore img{width:100%;height:100%;display:block;
+  filter:drop-shadow(0 3px 10px rgba(246,33,136,.45));
+  transition:transform .22s var(--e1)}
+#cursore.acceso{opacity:1}
+#cursore.sopra img{transform:scale(1.45) rotate(-8deg)}
+#cursore.premuto img{transform:scale(1.12) rotate(2deg)}
+@media (prefers-reduced-motion:reduce){#cursore img{transition:none}}
+
+/* ── il flusso che sfila lungo la linea ── */
+.flusso{position:absolute;inset:0;pointer-events:none;z-index:1}
+.oggetto{position:absolute;left:0;top:0;opacity:0;
+  transform:translate3d(-50%,-50%,0);white-space:nowrap}
+.oggetto.dato{font-family:var(--mono);text-align:center}
+.oggetto.dato b{display:block;font-size:30px;font-weight:700;letter-spacing:-.05em;color:var(--accent);line-height:1}
+.oggetto.dato span{display:block;margin-top:6px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#B9C2CE}
+.oggetto.nome{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.04em;color:#E7ECF3;opacity:0}
+.oggetto.telefono{width:118px}
+.oggetto.telefono video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:14px;
+  border:2px solid rgba(191,217,232,.28);background:#0B0D12;box-shadow:0 18px 44px -18px rgba(0,0,0,.9)}
+@media (max-width:760px){
+  .oggetto.telefono{width:86px}
+  .oggetto.dato b{font-size:22px}
+  .oggetto.nome{font-size:19px}
+}
+
+/* con movimento ridotto niente sovrapposizioni: le frasi si impilano */
+html.fermo #eroe{height:auto}
+html.fermo .palco{position:static;height:auto;padding:110px 0 70px}
+html.fermo #tela{display:none}
+html.fermo .flusso,html.fermo .cue{display:none}
+html.fermo .stazione{position:static;opacity:1!important;display:block;padding:26px 0}
+html.fermo .stazione::before{display:none}
+html.fermo .stazione .col{width:100%;max-width:44ch;transform:none;margin:0;text-align:left}
+html.fermo .stazione.centro .col{margin:0}
+html.fermo .lockup{position:static;transform:none;opacity:1;justify-content:flex-start;
+  gap:24px;padding:0 clamp(20px,4.4vw,72px);margin-bottom:26px}
+
+/* il logo che si forma quando la linea ruota */
+.lockup{position:absolute;left:0;right:0;top:35.5%;transform:translateY(-50%);z-index:3;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;gap:clamp(62px,8.4vw,150px);
+  font-family:var(--display);font-weight:900;letter-spacing:-.05em;line-height:1;
+  font-size:clamp(26px,4.6vw,72px);opacity:var(--u,0);text-shadow:var(--tshadow)}
+
+.bottone{display:inline-flex;align-items:center;gap:11px;background:var(--accent);color:#0B0D12;text-decoration:none;
+  padding:16px 30px;border-radius:99px;font-family:var(--testo);font-weight:500;font-size:15.5px;text-shadow:none;
+  pointer-events:auto;transition:transform .3s var(--e1),box-shadow .3s var(--e2),background .3s}
+.bottone:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(246,33,136,.62)}
+.bottone.fantasma{background:transparent;color:var(--text-primary);border:1px solid var(--linea)}
+.bottone.fantasma:hover{border-color:var(--accent);background:var(--accent-muted);box-shadow:none}
+.cue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;opacity:calc(1 - var(--u,0))}
+.cue .occhiello{font-size:13px;font-weight:700;letter-spacing:.30em;color:#FFFFFF;text-shadow:var(--tshadow)}
+.cue i{width:1px;height:44px;background:linear-gradient(var(--accent),transparent);animation:cala 2.4s ease-in-out infinite}
+@keyframes cala{0%,100%{opacity:.25;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ═════ sezioni ═════ */
+.sez{padding:clamp(80px,13vh,150px) 0;position:relative}
+.chiara{background:var(--carta);color:var(--inchiostro)}
+.chiara .lede{color:#4B4956}
+.chiara .occhiello{color:#5A5666}
+
+/* la linea firma */
+.firma{display:block;width:100%;height:3px;overflow:visible}
+.firma line{stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.5s var(--e1)}
+.firma.on line{stroke-dashoffset:0}
+
+/* prova / casi */
+.casi{margin-top:clamp(36px,5.5vh,60px);border-top:1px solid var(--linea-chiara)}
+.caso{display:grid;grid-template-columns:52px 1.15fr 1.5fr auto;gap:clamp(12px,2.6vw,36px);align-items:center;width:100%;
+  padding:clamp(20px,3vw,30px) clamp(8px,1.8vw,22px);border-bottom:1px solid var(--linea-chiara);
+  background:none;border-left:0;border-right:0;border-top:0;text-align:left;font:inherit;color:inherit;cursor:pointer;position:relative;
+  transition:background .4s var(--e2),padding-left .4s var(--e1)}
+.caso::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);transition:width .35s var(--e1)}
+.caso:hover,.caso:focus-visible{background:rgba(11,13,18,.04);padding-left:clamp(20px,2.6vw,38px)}
+.caso:hover::before,.caso:focus-visible::before{width:4px}
+.caso .n{font-family:var(--mono);font-size:11px;font-weight:500;color:#66626F}
+.caso .cli{font-family:var(--display);font-weight:900;font-size:clamp(18px,2.2vw,29px);letter-spacing:-.035em}
+.caso .tit{font-size:15px;line-height:1.45;color:#5A5766}
+.caso .kpi{font-family:var(--mono);font-weight:700;font-size:clamp(14px,1.6vw,19px);color:var(--accent-scuro);white-space:nowrap;letter-spacing:-.02em}
+.caso .kpi small{display:block;font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#66626F;margin-top:4px}
+
+/* tieni premuto */
+.premi{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:center;margin-top:clamp(36px,5vh,60px)}
+.campo{position:relative;aspect-ratio:4/3;border:1px solid var(--linea);border-radius:14px;overflow:hidden;background:var(--panel);touch-action:pan-y;cursor:grab}
+.campo:active{cursor:grabbing}
+.fr{position:absolute;width:10px;height:3px;border-radius:2px;background:var(--ghiaccio);opacity:.65}
+.linea-gelo{position:absolute;left:8%;right:8%;top:50%;height:3px;border-radius:2px;background:var(--accent);
+  transform:scaleX(var(--g,0));transform-origin:center;opacity:calc(.25 + .75*var(--g,0))}
+.premi-testo h3{font-size:clamp(22px,2.7vw,36px)}
+.premi-testo ol{margin-top:22px;list-style:none;display:flex;flex-direction:column;gap:14px}
+.premi-testo li{display:flex;gap:14px;align-items:baseline;opacity:.3;transition:opacity .5s var(--e2)}
+.premi-testo li.on{opacity:1}
+.premi-testo li b{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:700}
+.tieni{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-secondary)}
+
+/* metodo */
+.metodo{display:grid;grid-template-columns:repeat(6,1fr);margin-top:clamp(36px,5vh,60px);border-top:1px solid var(--linea)}
+.tappa{padding:clamp(20px,2.6vw,32px) clamp(9px,1.3vw,20px);border-right:1px solid var(--linea);position:relative}
+.tappa:last-child{border-right:0}
+.tappa::before{content:"";position:absolute;top:-1px;left:0;height:2px;width:0;background:var(--accent);transition:width .9s var(--e1)}
+.tappa.on::before{width:100%}
+.tappa em{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--text-secondary);letter-spacing:.14em}
+.tappa h3{margin-top:10px;font-size:clamp(13.5px,1.3vw,17px);letter-spacing:-.02em}
+
+/* servizi */
+.servizi{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea-chiara);border-block:1px solid var(--linea-chiara);margin-top:clamp(36px,5vh,60px)}
+.serv{background:var(--carta);padding:clamp(26px,3.2vw,44px);transition:background .4s var(--e2)}
+.serv:hover{background:#fff}
+.serv .n{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent-scuro)}
+.serv h3{margin:16px 0 12px;font-size:clamp(16px,1.7vw,21px);letter-spacing:-.025em;line-height:1.25}
+.serv p{font-size:14.5px;line-height:1.66;color:#5A5766}
+
+/* ecosistema */
+.eco{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(11px,1.4vw,18px);margin-top:clamp(36px,5vh,60px)}
+.div{border:1px solid var(--linea);border-radius:6px;padding:clamp(24px,2.8vw,36px);display:flex;flex-direction:column;
+  min-height:clamp(220px,27vh,290px);text-decoration:none;transition:.45s var(--e1);position:relative;overflow:hidden}
+.div::after{content:"";position:absolute;inset:auto 0 0 0;height:0;background:linear-gradient(180deg,transparent,rgba(246,33,136,.14));transition:height .5s var(--e2)}
+.div:hover{border-color:rgba(246,33,136,.5);transform:translateY(-6px)}
+.div:hover::after{height:100%}
+.div .lk{position:relative;z-index:2;font-family:var(--display);font-weight:900;
+  font-size:clamp(12.5px,1.28vw,18px);letter-spacing:-.04em;line-height:1.04;
+  display:flex;align-items:center;gap:7px;white-space:nowrap}
+.div .lk .riga{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.div .lk i{width:clamp(14px,1.35vw,20px);height:2.5px;background:var(--accent);border-radius:2px;display:block;flex:none}
+.div .lk em{font-style:normal;color:var(--accent);white-space:nowrap}
+.div p{position:relative;z-index:2;margin-top:14px;font-size:14px;line-height:1.62;color:var(--text-secondary);flex:1}
+.div .go{position:relative;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-secondary)}
+.div:hover .go{color:var(--accent)}
+.div.qui{background:rgba(246,33,136,.05);border-color:rgba(246,33,136,.3)}
+
+
+/* ── striscia dei totali ── */
+.totali{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--linea-chiara);
+  border-bottom:1px solid var(--linea-chiara);margin-top:0}
+.tot{background:var(--carta);padding:clamp(26px,3.4vw,44px) clamp(12px,1.8vw,26px)}
+.tot b{display:block;font-family:var(--mono);font-weight:700;font-size:clamp(26px,3.6vw,50px);
+  letter-spacing:-.05em;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1}
+.tot span{display:block;margin-top:11px;font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:#5F5B6B;line-height:1.6}
+@media(max-width:860px){.totali{grid-template-columns:repeat(2,1fr)}}
+
+/* ── la spina dorsale dell'ecosistema ── */
+.spina{margin-top:clamp(36px,5vh,60px);margin-bottom:-14px}
+.spina svg{width:100%;height:clamp(66px,8vw,110px);overflow:visible}
+.spina .asse{stroke:var(--accent);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.5s var(--e1)}
+.spina.viva .asse{stroke-dashoffset:0}
+.spina .rami path{stroke:rgba(246,33,136,.42);stroke-width:2;stroke-dasharray:90;stroke-dashoffset:90;
+  transition:stroke-dashoffset .7s var(--e1)}
+.spina.viva .rami path{stroke-dashoffset:0}
+.spina .rami path:nth-child(1){transition-delay:.55s}
+.spina .rami path:nth-child(2){transition-delay:.75s}
+.spina .rami path:nth-child(3){transition-delay:.95s}
+.spina .rami path:nth-child(4){transition-delay:1.15s}
+.spina .perni circle{fill:var(--accent);opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);
+  transition:opacity .5s var(--e1),transform .6s var(--e1)}
+.spina.viva .perni circle{opacity:1;transform:scale(1)}
+.spina .perni circle:nth-child(1){transition-delay:.5s}
+.spina .perni circle:nth-child(2){transition-delay:.7s}
+.spina .perni circle:nth-child(3){transition-delay:.9s}
+.spina .perni circle:nth-child(4){transition-delay:1.1s}
+@media(max-width:1080px){.spina{display:none}}
+@media(prefers-reduced-motion:reduce){
+  .spina .asse,.spina .rami path{stroke-dashoffset:0}
+  .spina .perni circle{opacity:1;transform:none}
+}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(14px,1.9vw,26px);margin-top:clamp(36px,5vh,60px)}
+.persona .ritratto{aspect-ratio:3/4;border-radius:7px;overflow:hidden;background:linear-gradient(155deg,#DDE1E7,#C9CFD8);position:relative}
+.persona .ritratto img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .5s var(--e2),transform .9s var(--e1)}
+.persona:hover .ritratto img{filter:none;transform:scale(1.04)}
+.persona .vuoto{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7F7B88}
+.persona h4{margin-top:14px;font-size:17px;letter-spacing:-.03em}
+.persona span{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#5A5666}
+
+/* faq */
+.faq{margin-top:clamp(36px,5vh,60px);border-top:1px solid var(--linea)}
+.q{border-bottom:1px solid var(--linea)}
+.q summary{list-style:none;cursor:pointer;padding:clamp(20px,2.6vw,28px) 0;display:flex;gap:20px;align-items:baseline;
+  font-family:var(--display);font-weight:900;font-size:clamp(17px,1.9vw,24px);letter-spacing:-.03em}
+.q summary::-webkit-details-marker{display:none}
+.q summary::after{content:"+";margin-left:auto;color:var(--accent);font-family:var(--mono);font-weight:700;transition:transform .35s var(--e1)}
+.q[open] summary::after{transform:rotate(45deg)}
+.q p{padding-bottom:clamp(20px,2.6vw,28px);max-width:62ch;color:var(--text-secondary)}
+
+/* form */
+.modulo{margin-top:clamp(36px,5vh,60px);display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px}
+.campo-testo{display:flex;flex-direction:column;gap:8px}
+.campo-testo.largo{grid-column:1/-1}
+.campo-testo label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary)}
+.campo-testo input,.campo-testo textarea{background:rgba(191,217,232,.05);border:1px solid var(--linea);border-radius:8px;
+  padding:14px 16px;color:var(--text-primary);font-family:var(--testo);font-size:16px;transition:border-color .3s}
+.campo-testo input:focus,.campo-testo textarea:focus{border-color:var(--accent);outline:none}
+.campo-testo textarea{min-height:110px;resize:vertical}
+.esito{grid-column:1/-1;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--accent);min-height:20px}
+
+footer{border-top:1px solid var(--linea);padding:34px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--text-secondary)}
+
+
+
+/* ── ritratto del team ── */
+.ritratto-team{margin-top:clamp(32px,4.5vh,52px);position:relative;border-radius:12px;overflow:hidden;
+  background:linear-gradient(150deg,#DFE3E9,#C9CFD8)}
+.ritratto-team img{width:100%;aspect-ratio:16/8;object-fit:cover;display:block;
+  filter:grayscale(.25);transition:filter .7s var(--e2),transform 1.1s var(--e1)}
+.ritratto-team:hover img{filter:none;transform:scale(1.02)}
+.ritratto-team figcaption{position:absolute;left:0;bottom:0;padding:16px 22px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.6)}
+
+/* ── portfolio ── */
+.d-tit{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-secondary);
+  margin-top:clamp(40px,6vh,68px);display:flex;align-items:center;gap:11px}
+.d-tit::before{content:"";width:18px;height:2px;background:var(--accent);border-radius:2px;flex:none}
+.marchi{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(10px,1.4vw,18px)}
+.marchio-card{position:relative;border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:var(--panel);
+  transition:transform .5s var(--e1),border-color .4s}
+.marchio-card:hover{transform:translateY(-6px);border-color:rgba(246,33,136,.5)}
+.marchio-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;opacity:.92;transition:opacity .4s}
+.marchio-card:hover img{opacity:1}
+.marchio-card{text-decoration:none;display:block}
+.marchio-card span{position:absolute;left:0;bottom:0;right:0;padding:16px;
+  background:linear-gradient(transparent,rgba(8,10,16,.94));display:flex;flex-direction:column;gap:5px}
+.marchio-card span b{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:-.03em;color:#EDF1F7}
+.marchio-card span em{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent)}
+.marchio-card::after{content:"Apri";position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:#0B0D12;background:var(--accent);padding:6px 11px;border-radius:99px;
+  opacity:0;transform:translateY(-4px);transition:.35s var(--e1)}
+.marchio-card:hover::after{opacity:1;transform:none}
+.clienti{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}
+.cliente{border:1px solid var(--linea);border-radius:99px;padding:10px 18px;
+  font-family:var(--testo);font-weight:500;font-size:14.5px;color:var(--text-secondary);
+  transition:border-color .3s,color .3s,transform .3s var(--e1)}
+.cliente:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.in-arrivo{margin-top:clamp(34px,5vh,54px);padding:clamp(22px,3vw,34px);border:1px dashed var(--linea);border-radius:10px}
+.in-arrivo p{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#6E7784}
+
+/* ── piè di pagina ── */
+footer{display:block;border-top:1px solid var(--linea);margin-top:0}
+.piede{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(24px,3vw,48px);
+  padding:clamp(46px,6vh,72px) clamp(20px,4.4vw,72px)}
+.piede-col p{font-size:14.5px;line-height:1.7;color:var(--text-secondary);margin-top:12px}
+.piede-col a{text-decoration:none;transition:color .3s}
+.piede-col a:hover{color:var(--accent)}
+.piede-marchio{font-size:20px}
+.piede-eti{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6E7784;margin-top:0!important}
+.piede-basso{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  padding:20px clamp(20px,4.4vw,72px);border-top:1px solid var(--linea);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;color:#6E7784}
+@media(max-width:860px){.piede{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.piede{grid-template-columns:1fr}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px)}
+.rv.in{opacity:1;transform:none;transition:opacity .85s var(--e1),transform .85s var(--e1)}
+
+/* la linea funziona su ogni schermo. Il movimento ridotto lo gestiscè il motore,
+   che disegna direttamente la posa finale e non anima nulla. */
+@media (max-width:760px){
+  #eroe{height:380vh}
+  .stazione .col{width:min(86%,520px)}
+  .stazione.dx .col{text-align:left}
+  .stazione.sx::before,.stazione.dx::before{inset:-4%;
+    background:radial-gradient(ellipse 78% 50% at 50% 50%,rgba(4,5,10,.78),rgba(4,5,10,0) 76%)}
+  .lockup{gap:clamp(46px,16vw,90px);font-size:clamp(22px,7vw,42px)}
+}
+@media (max-height:560px){.cue{display:none}}
+@media (pointer:coarse){
+  .bottone{min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+  .menu a{padding:13px 12px}
+  .q summary{padding-block:22px}
+}
+@media (max-width:1080px){
+  .servizi{grid-template-columns:repeat(2,1fr)}
+  .eco{grid-template-columns:repeat(2,1fr)}
+  .metodo{grid-template-columns:repeat(3,1fr)}
+  .premi{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .menu{gap:2px}
+  .menu li{display:none}
+  .menu li:first-child,.menu li:last-child{display:block}
+  .menu a{padding:9px 11px;font-size:10px;letter-spacing:.1em}
+  .caso{grid-template-columns:34px 1fr;row-gap:7px}
+  .caso .tit,.caso .kpi{grid-column:2}
+  .servizi{grid-template-columns:1fr}
+  .eco{grid-template-columns:1fr}
+  .metodo{grid-template-columns:repeat(2,1fr)}
+  .modulo{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .rv{opacity:1;transform:none}
+  .tappa::before{width:100%}
+  .firma line{stroke-dashoffset:0}
+  .premi-testo li{opacity:1}
+}
+body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:paused!important}
+</style>
+</head>
+<body>
+<a class="salta" href="#main">Vai al contenuto</a>
+<div id="cursore" aria-hidden="true"><img src="assets/cursore.svg" alt=""></div>
+<div class="ambiente" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="wrap">
+    <a class="marchio" href="#top">freeze<i aria-hidden="true"></i>studio</a>
+    <ul class="menu">
+      <li><a href="#prova">Casi studio</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#metodo">Metodo</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#ecosistema">Ecosistema</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#parliamone">Contatti</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+<!-- ══ EROE: LA LINEA ══ -->
+<section id="eroe" aria-label="Introduzione">
+  <div class="palco" id="palco">
+    <canvas id="tela" aria-hidden="true"></canvas>
+
+    <div class="flusso" aria-hidden="true">
+      <div class="oggetto dato" data-k0=".02" data-dur=".34" data-lato="1" data-x=".95"><b>714.274</b><span>visualizzazioni</span></div>
+      <div class="oggetto nome" data-k0=".06" data-dur=".30" data-lato="-1" data-x="1.05">Peppe Nappa</div>
+      <div class="oggetto telefono" data-k0=".09" data-dur=".42" data-lato="-1" data-x=".72"><video src="assets/eroe/e1.mp4" poster="assets/eroe/e1.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="oggetto dato" data-k0=".16" data-dur=".32" data-lato="1" data-x=".78"><b>+37%</b><span>vendite online</span></div>
+      <div class="oggetto nome" data-k0=".22" data-dur=".30" data-lato="1" data-x="1.12">Vogue Outlet</div>
+      <div class="oggetto dato" data-k0=".27" data-dur=".33" data-lato="-1" data-x=".92"><b>929</b><span>nuovi follower</span></div>
+      <div class="oggetto telefono" data-k0=".31" data-dur=".42" data-lato="1" data-x=".70"><video src="assets/eroe/e2.mp4" poster="assets/eroe/e2.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="oggetto nome" data-k0=".37" data-dur=".30" data-lato="-1" data-x="1.06">Gate 23</div>
+      <div class="oggetto dato" data-k0=".42" data-dur=".32" data-lato="1" data-x=".88"><b>+25%</b><span>coperti</span></div>
+      <div class="oggetto nome" data-k0=".47" data-dur=".30" data-lato="1" data-x="1.1">Ristorante Da Luigi</div>
+      <div class="oggetto telefono" data-k0=".50" data-dur=".42" data-lato="-1" data-x=".74"><video src="assets/eroe/e3.mp4" poster="assets/eroe/e3.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="oggetto dato" data-k0=".55" data-dur=".32" data-lato="-1" data-x=".95"><b>197</b><span>voti di scarto</span></div>
+      <div class="oggetto nome" data-k0=".60" data-dur=".28" data-lato="1" data-x="1.08">Badiula</div>
+      <div class="oggetto dato" data-k0=".64" data-dur=".30" data-lato="1" data-x=".84"><b>92,4%</b><span>dai Per te</span></div>
+      <div class="oggetto nome" data-k0=".68" data-dur=".26" data-lato="-1" data-x="1.04">Enzo Pupillo</div>
+    </div>
+    <div class="stazione sx b-scatter" data-a="0" data-b=".17">
+      <div class="col"><p class="frase" data-testo="Pubblicare tutti i giorni non è una strategia."></p></div>
+    </div>
+    <div class="stazione dx b-drift" data-a=".22" data-b=".45">
+      <div class="col"><p class="frase" data-testo="Il problema non era il budget. Era che nessuno aveva chiesto cosa dovevi ottenere."></p></div>
+    </div>
+    <div class="stazione sx b-snap" data-a=".48" data-b=".66">
+      <div class="col"><p class="frase" data-testo="Ogni contenuto ha un obiettivo. Anche questo."></p></div>
+    </div>
+
+    <div class="lockup" aria-hidden="true"><span>freeze</span><span>studio</span></div>
+
+    <div class="stazione centro b-rise" data-a=".86" data-b="1">
+      <div class="col">
+        <h1 class="frase" data-testo="Otto casi studio. 8,4 milioni di visualizzazioni."></h1>
+        <p class="sotto">E i numeri che contano davvero: più 37% di vendite, più 25% di coperti, un sindaco eletto.</p>
+        <div class="azione"><a class="bottone" href="#prova">Guardali</a></div>
+      </div>
+    </div>
+
+    <div class="cue" aria-hidden="true"><i></i><span class="occhiello">Scorri</span></div>
+  </div>
+</section>
+
+<!-- ══ LA PROVA ══ -->
+<section class="sez chiara" id="prova">
+  <div class="wrap">
+    <svg class="firma rv" viewBox="0 0 1000 3" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1.5" x2="1000" y2="1.5"/></svg>
+    <p class="occhiello rv" style="margin-top:26px">La prova</p>
+    <h2 class="h-sez rv">Cosa è cambiato davvero.</h2>
+    <p class="lede rv">Le agenzie mostrano immagini. Noi mostriamo cosa è successo all'attività del cliente, con il periodo di confronto e la piattaforma da cui arriva il dato, così puoi verificarlo dentro i tuoi account.</p>
+    <div class="casi" id="lista-casi"></div>
+
+    <div class="totali" id="totali">
+      <div class="tot"><b class="conta" data-a="8400000" data-suf=" M" data-div="1000000" data-dec="1">0</b><span>Visualizzazioni sui progetti raccontati qui</span></div>
+      <div class="tot"><b class="conta" data-a="8">0</b><span>Casi studio con numeri verificati</span></div>
+      <div class="tot"><b class="conta" data-a="3">0</b><span>Campagne per la carica di sindaco</span></div>
+      <div class="tot"><b class="conta" data-a="4">0</b><span>Divisioni dell'ecosistema</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ TIENI PREMUTO ══ -->
+<section class="sez" id="ferma">
+  <div class="wrap">
+    <p class="occhiello rv">Il nostro nome</p>
+    <h2 class="h-sez rv">Freeze e il momento in cui smette il rumore.</h2>
+    <div class="premi">
+      <div class="campo rv" id="campo" role="button" tabindex="0" aria-label="Tieni premuto per fermare i frammenti">
+        <div class="linea-gelo" aria-hidden="true"></div>
+      </div>
+      <div class="premi-testo rv">
+        <h3>Tieni premuto.</h3>
+        <ol id="passi">
+          <li><b>01</b><span>I contenuti smettono di andare ognuno per conto suo.</span></li>
+          <li><b>02</b><span>Prendono una direzione sola, decisa prima.</span></li>
+          <li><b>03</b><span>E a quel punto si può misurare cosa hanno prodotto.</span></li>
+        </ol>
+        <p class="tieni" id="istruzione">Premi e tieni premuto sul riquadro</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METODO ══ -->
+<section class="sez" id="metodo">
+  <div class="wrap">
+    <p class="occhiello rv">Il metodo</p>
+    <h2 class="h-sez rv">La prima domanda non è che campagna facciamo. È cosa devi ottenere.</h2>
+    <div class="metodo" id="griglia-metodo">
+      <div class="tappa"><em>01</em><h3>Analisi</h3></div>
+      <div class="tappa"><em>02</em><h3>Strategia</h3></div>
+      <div class="tappa"><em>03</em><h3>Creatività</h3></div>
+      <div class="tappa"><em>04</em><h3>Distribuzione</h3></div>
+      <div class="tappa"><em>05</em><h3>Dati</h3></div>
+      <div class="tappa"><em>06</em><h3>Ottimizzazione</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STUDIO ══ -->
+<section class="sez chiara" id="studio">
+  <div class="wrap">
+    <p class="occhiello rv">Cosa costruiamo</p>
+    <h2 class="h-sez rv">Sistemi, non azioni isolate.</h2>
+    <div class="servizi">
+      <div class="serv rv"><span class="n">01</span><h3>Strategia e gestione social</h3><p>Sistemi social costruiti su strategia, contenuti e crescita costante, coerenti su tutte le piattaforme.</p></div>
+      <div class="serv rv"><span class="n">02</span><h3>Brand, design e identità visiva</h3><p>Identita, linguaggi visivi e sistemi di design che rendono i marchi riconoscibili e pronti a crescere.</p></div>
+      <div class="serv rv"><span class="n">03</span><h3>Contenuti e produzione</h3><p>Video, shooting, format. Un video efficace non nasce quando premi REC. Nasce prima.</p></div>
+      <div class="serv rv"><span class="n">04</span><h3>Advertising</h3><p>Campagne guidate dai dati. Non partiamo dalle sponsorizzate, partiamo dalla strategia.</p></div>
+      <div class="serv rv"><span class="n">05</span><h3>Web, app ed esperienze digitali</h3><p>Piattaforme pensate per convertire e per crescere insieme al brand, non solo per essere belle.</p></div>
+      <div class="serv rv"><span class="n">06</span><h3>Intelligenza artificiale</h3><p>L'AI è il motore, la strategia è la direzione. Analisi, produzione e ottimizzazione guidate dalle persone.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ECOSISTEMA ══ -->
+<section class="sez" id="ecosistema">
+  <div class="wrap">
+    <p class="occhiello rv">L'ecosistema</p>
+    <h2 class="h-sez rv">Un'azienda non dovrebbe parlare con dieci fornitori diversi.</h2>
+    <p class="lede rv">Si entra da un'esigenza e si trova risposta anche alle altre. La relazione viene prima della vendita.</p>
+    <div class="spina" id="spina" aria-hidden="true">
+      <svg viewBox="0 0 1000 120" preserveAspectRatio="none">
+        <line class="asse" x1="20" y1="26" x2="980" y2="26"/>
+        <g class="rami">
+          <path d="M125 26 L125 104"/><path d="M375 26 L375 104"/>
+          <path d="M625 26 L625 104"/><path d="M875 26 L875 104"/>
+        </g>
+        <g class="perni">
+          <circle cx="125" cy="26" r="7"/><circle cx="375" cy="26" r="7"/>
+          <circle cx="625" cy="26" r="7"/><circle cx="875" cy="26" r="7"/>
+        </g>
+      </svg>
+    </div>
+    <div class="eco">
+      <a class="div qui rv" href="#studio"><span class="lk"><span class="riga">freeze<i aria-hidden="true"></i></span><em>studio</em></span>
+        <p>Marketing, comunicazione, creatività, advertising, contenuti, web, dati e intelligenza artificiale.</p><span class="go">Sei qui</span></a>
+      <a class="div rv" href="https://www.freezeformazione.it" target="_blank" rel="noopener"><span class="lk"><span class="riga">freeze<i aria-hidden="true"></i></span><em>formazione</em></span>
+        <p>Formazione professionale e aziendale, sicurezza sul lavoro, competenze e certificazioni. Formazione, consulenza e accompagnamento.</p><span class="go">Vai al sito</span></a>
+      <a class="div rv" href="utility.html"><span class="lk"><span class="riga">freeze<i aria-hidden="true"></i></span><em>utility</em></span>
+        <p>Luce, gas e telefonia per aziende e privati. Prima capiamo la situazione, poi individuiamo la soluzione.</p><span class="go">Scopri il servizio</span></a>
+      <a class="div rv" href="noleggio.html"><span class="lk"><span class="riga">freeze<i aria-hidden="true"></i></span><em>noleggio</em></span>
+        <p>Noleggio operativo, soluzioni tecnologiche e noleggio auto a lungo termine, senza immobilizzare capitale.</p><span class="go">Scopri</span></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ PORTFOLIO ══ -->
+<section class="sez" id="portfolio">
+  <div class="wrap">
+    <p class="occhiello rv">Portfolio</p>
+    <h2 class="h-sez rv">Non solo gli otto raccontati sopra.</h2>
+    <p class="lede rv">I casi studio sono i progetti di cui possiamo mostrare i numeri. Il portfolio è tutto il resto: i marchi che abbiamo disegnato, i siti che abbiamo costruito, le attività che seguiamo ogni mese.</p>
+
+    <p class="d-tit rv">I marchi che abbiamo costruito</p>
+    <div class="marchi" id="marchi"></div>
+
+    <p class="d-tit rv">Con chi lavoriamo</p>
+    <div class="clienti rv" id="clienti"></div>
+
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section class="sez chiara" id="team">
+  <div class="wrap">
+    <p class="occhiello rv">Le persone</p>
+    <h2 class="h-sez rv">Dietro ogni numero c'è qualcuno che l'ha costruito.</h2>
+    <p class="lede rv">Ecco il nostro team.</p>
+    <figure class="ritratto-team rv">
+      <img src="assets/team.jpg" alt="Il team di Freeze Studio" width="1600" height="800"
+           onerror="this.closest('.ritratto-team').remove()">
+      <figcaption>Freeze Studio, Catania</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="sez" id="domande">
+  <div class="wrap">
+    <p class="occhiello rv">Le domande vere</p>
+    <h2 class="h-sez rv">Quelle che ci chiedono prima di firmare.</h2>
+    <div class="faq" id="lista-faq"></div>
+  </div>
+</section>
+
+<!-- ══ CONTATTI ══ -->
+<section class="sez" id="parliamone">
+  <div class="wrap">
+    <svg class="firma rv" viewBox="0 0 1000 3" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="1.5" x2="1000" y2="1.5"/></svg>
+    <h2 class="h-sez rv" style="max-width:15ch;margin-top:26px">Raccontaci cosa deve cambiare.</h2>
+    <p class="lede rv">Scrivici cosa vorresti ottenere. Ti rispondiamo con la nostra lettura del problema, prima ancora di parlare di preventivi.</p>
+    <form class="modulo rv" id="modulo">
+      <div class="campo-testo"><label for="f-nome">Nome</label><input id="f-nome" name="nome" required></div>
+      <div class="campo-testo"><label for="f-att">Attività</label><input id="f-att" name="attivita" required></div>
+      <div class="campo-testo largo"><label for="f-con">Come ti contattiamo</label><input id="f-con" name="contatto" required placeholder="Email o telefono"></div>
+      <div class="campo-testo largo"><label for="f-msg">Cosa deve cambiare</label><textarea id="f-msg" name="messaggio" required></textarea></div>
+      <div class="campo-testo largo"><button class="bottone" type="submit">Manda</button></div>
+      <p class="esito" id="esito" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap piede">
+    <div class="piede-col">
+      <span class="marchio piede-marchio">freeze<i aria-hidden="true"></i>studio</span>
+      <p>Uno studio strategico che parte dal problema, non dallo strumento.</p>
+    </div>
+    <div class="piede-col">
+      <p class="piede-eti">Dove siamo</p>
+      <p>Via Livorno 3<br>95127 Catania</p>
+    </div>
+    <div class="piede-col">
+      <p class="piede-eti">Scrivici</p>
+      <p><a href="mailto:info@freezestudio.it">info@freezestudio.it</a><br>
+         <a href="tel:+393491666839">+39 349 1666 839</a></p>
+    </div>
+    <div class="piede-col">
+      <p class="piede-eti">L'ecosistema</p>
+      <p><a href="#studio">Studio</a><br><a href="https://www.freezeformazione.it" target="_blank" rel="noopener">Formazione</a><br>
+         <a href="utility.html">Utility</a><br><a href="noleggio.html">Noleggio</a></p>
+    </div>
+  </div>
+  <div class="wrap piede-basso">
+    <span>Freeze Studio S.n.c.</span>
+    <span>P.IVA e C.F. 06230830876</span>
+  </div>
+</footer>
+
+<script>
+/* ══════════ dati ══════════ */
+const CASI=[
+ {id:"01-peppe-nappa",cliente:"Peppe Nappa",tit:"La spesa di famiglia",kpi:"714.274",kpiL:"visualizzazioni in 10 mesi",settore:"Supermercati",periodo:"13 ott 2025 / 18 ago 2026",canali:"Facebook, Instagram",fonte:"Meta Business Suite",
+  dati:[["714.274","Visualizzazioni"],["7.365","Interazioni"],["9.923","Visite ai profili"],["375","Nuovi follower"]],
+  cap:[["Problema","Peppe Nappa veniva percepito come un supermercato e basta. Dentro c'era molto di più, il bar e la gastronomia, ma alle persone non arrivava. E un supermercato che comunica solo offerte compete solo sul prezzo, una gara che in provincia non vince chi ha il negozio migliore."],
+      ["Strategia","Prima dei contenuti abbiamo definito un'idea guida: la spesa di famiglia. Non un claim decorativo, un criterio di lavoro. Ogni contenuto doveva far sentire chi guarda a casa propria."],
+      ["Produzione","Contenuti continuativi, shooting sui momenti dell'anno e format costruiti sulle persone. Su questa base sono nati due servizi: la Cambusa, la spesa consegnata in barca e raccontata a Brucoli con chi la barca ce l'ha davvero, e il catering, portato sul mercato anche con eventi in partnership con altre attività di Augusta."],
+      ["Risultato","Oltre 714.000 visualizzazioni e 375 nuovi follower. Sul piano commerciale il cliente riferisce chiamate in arrivo per il catering, oggi servizio attivo, e richieste generate dai contenuti dedicati alla Cambusa."],
+      ["Lezione","Il lavoro non è stato pubblicare più offerte. È stato cambiare la domanda a cui la pagina rispondeva, da quanto costa a di chi mi fido."]]},
+ {id:"02-vogue-outlet",cliente:"Vogue Outlet",tit:"Le persone vendono i vestiti",kpi:"2.530.519",kpiL:"visualizzazioni in 16 mesi",settore:"Abbigliamento donna",periodo:"10 apr 2025 / 18 ago 2026",canali:"Instagram, Facebook",fonte:"Meta Business Suite e dati del cliente",notaFoto:"Il feed di Vogue Outlet Lentini",
+  dati:[["+37%","Vendite online"],["2.530.519","Visualizzazioni"],["9.059","Interazioni"],["929","Nuovi follower"]],
+  cap:[["Problema","Un outlet di abbigliamento donna con brand importanti in assortimento. Il valore in negozio c'era già. Il punto è che un outlet vive di rotazione e di fiducia: la merce cambia in continuazione, e una cliente deve sapere cosa e arrivato e come le sta addosso prima ancora di entrare."],
+      ["Strategia","Smettere di mostrare i capi e iniziare a mostrare le persone che li indossano. Un capo appeso comunica un prezzo, un capo indossato comunica come stara a te. Volti ricorrenti, video come standard, e contenuti che rispondono alla domanda vera: cosa mi metto."],
+      ["Produzione","Video con Federica, il volto di influencer marketing dell'attività, che prova i capi e ne mostra vestibilità e resa reale. Video parlati con Adriano, che lavora in negozio e i capi li conosce. Format di outfit costruiti per occasione, con un ritmo alto come richiede un assortimento che cambia di continuo."],
+      ["Risultato","Oltre 2,5 milioni di visualizzazioni e, soprattutto, più 37% di vendite online. Il profilo riceve richieste continue sui capi in messaggio diretto. L'analisi per contenuto conferma la scelta: in 90 giorni i reel hanno generato in media 6,5 volte le visualizzazioni delle foto, e i primi quindici contenuti erano tutti reel."],
+      ["Lezione","In un outlet non si vende il capo. Si vende la fiducia che quel capo, addosso, funzioni. Il tessuto e il movimento una foto non li può dare."]]},
+ {id:"07-da-luigi",cliente:"Ristorante Da Luigi",tit:"Pulito",kpi:"+25%",kpiL:"coperti nei giorni deboli",settore:"Ristorazione",periodo:"6 ott 2025 / 16 ago 2026",canali:"Instagram, TikTok",fonte:"Meta, TikTok e dati del cliente",
+  dati:[["+25%","Coperti giorni deboli"],["976.800","Visualizzazioni"],["57.965","Interazioni"],["3.328","Nuovi follower"]],
+  cap:[["Problema","Il ristorante non aveva un problema, era già pieno. Ma pieno il sabato non è pieno. C'erano giorni della settimana che non arrivavano al completo, e mancava una figura riconoscibile che desse un volto al locale."],
+      ["Strategia","Costruire un personaggio e costruire delle occasioni. Il personaggio è Santo, il figlio di Luigi. L'occasione sono le serate a tema, che trasformano un giorno qualsiasi in un motivo per uscire."],
+      ["Produzione","Un format costruito su una parola: alla fine di ogni video, quando i clienti assaggiano, arriva il pulito detto tutti insieme. Ha funzionato al punto da diventare lo slogan del ristorante, quello che in paese conoscono tutti. Accanto, la Domenica Italiana: musica, bandierine, atmosfera. Poi la ristrutturazione, i posti esterni per l'estate, le serate con il barman e i cocktail."],
+      ["Risultato","Quasi un milione di visualizzazioni senza aver mai aperto Facebook, che è stata una scelta e non una mancanza. In sala: più 25% di coperti nei giorni che non erano pieni, e nelle serate a tema il locale va al completo con oltre 140 persone sedute ai tavoli."],
+      ["Lezione","Il più 25% non arriva da più visibilita. Arriva dall'aver scelto un giorno preciso e dato alle persone un motivo per venire proprio quella sera."]]},
+ {id:"03-gate-23",cliente:"Gate 23",tit:"Il livello non si vede da una foto",kpi:"802.267",kpiL:"visualizzazioni in 2 anni",settore:"Padel center, Catania",periodo:"4 ago 2024 / 18 ago 2026",canali:"Instagram, Facebook",fonte:"Meta Business Suite",
+  dati:[["802.267","Visualizzazioni"],["9.127","Interazioni"],["36.495","Visite ai profili"],["618","Nuovi follower"]],
+  cap:[["Problema","Un centro padel con quattro campi coperti, palestra e bar. Il problema di un centro sportivo è che da fuori si somigliano tutti: una foto di un campo è uguale alla foto di qualunque altro campo. Quello che distingueva Gate 23 non era visibile."],
+      ["Strategia","Non comunicare la struttura, comunicare il livello. La comodità dei campi coperti, che significa giocare tutto l'anno. Le persone, perché chi inizia sceglie chi lo insegna e non il campo. E l'agonismo come motore, perché squadre e tornei sono la prova del livello."],
+      ["Produzione","Racconto continuativo delle squadre agonistiche, formazioni maschili e femminili con risultati importanti fino alla Serie C e alla Serie B, e copertura degli eventi ospitati: tornei TPRA, nazionali e internazionali, trattati come eventi di comunicazione e non come notizie interne."],
+      ["Risultato","Oltre 800.000 visualizzazioni in due anni. Ma il risultato più significativo non è social: Gate 23 ha costruito partnership commerciali con brand del settore padel, racchette, borsoni, attrezzatura, e continua a ospitare tornei nazionali e internazionali."],
+      ["Lezione","In uno sport di club l'audience non la fa il campo, la fa il calendario. E la conferma del posizionamento non arriva dai follower, arriva dalle partnership."]]},
+ {id:"08-badiula",cliente:"Badiula",tit:"Luxury siciliano",kpi:"314.560",kpiL:"visualizzazioni in 2 mesi e mezzo",settore:"Agriturismo",periodo:"3 giu / 18 ago 2026",canali:"Facebook, Instagram",fonte:"Meta Business Suite",
+  dati:[["314.560","Visualizzazioni"],["2.270","Interazioni"],["14.212","Visite ai profili"],["414","Nuovi follower"]],
+  cap:[["Problema","Badiula ha cambiato pelle: ristrutturazione completa, camere nuove, sala congressi, e un'identità costruita sul rustico siciliano, il terreno, l'agrumeto, il turismo esperienziale, una cucina siciliana con tocchi da bistrot. Il posizionamento reale era salito, la comunicazione no."],
+      ["Strategia","Allineare la percezione a quello che la struttura era diventata: coerenza visiva su tutto il feed, profondità storica per non far sembrare il riposizionamento nato ieri, e apertura all'estero, perché in alta stagione il cliente non è solo italiano."],
+      ["Produzione","Shooting dedicato al luxury siciliano. Caroselli costruiti recuperando l'archivio fotografico della struttura. E i video parlati, introdotti per la prima volta su questi canali: il racconto in prima persona, dosato e mai celebrativo. Sottotitoli in inglese e descrizioni bilingui su tutti i contenuti."],
+      ["Risultato","Oltre 314.000 visualizzazioni in meno di tre mesi, tutte in organico, e l'introduzione del formato che ha reso di più, al punto da definire il piano successivo: un reel a settimana."],
+      ["Lezione","Il lusso non si dichiara. Lo costruisce la coerenza di tutto quello che si vede. E la storia non va inventata quando serve, va trovata."]]},
+ {id:"04-pupillo",cliente:"Enzo Pupillo",tit:"Due mesi per arrivare a tutta la città",kpi:"Eletto",kpiL:"sindaco di Lentini",settore:"Comunicazione politica",periodo:"apr / mag 2026",canali:"Facebook, Instagram, TikTok",fonte:"Meta, TikTok e risultati elettorali pubblici",
+  dati:[["Eletto","Sindaco di Lentini"],["1.381.010","Visualizzazioni"],["43.174","Interazioni"],["3.312","Nuovi follower"]],
+  cap:[["Problema","Una campagna elettorale flash: due mesi per farsi conoscere, farsi capire e farsi votare. In una città come Lentini il candidato deve arrivare a tutte le fasce d'età, ma le fasce non stanno tutte nello stesso posto, e una campagna che presidia solo Facebook parla solo a chi ha già deciso."],
+      ["Strategia","Tre piattaforme con tre ruoli distinti, non lo stesso contenuto replicato tre volte. Facebook per il volume e l'elettorato adulto. Instagram per il racconto quotidiano della campagna. TikTok per intercettare i giovani, quelli che una campagna tradizionale non raggiunge mai."],
+      ["Produzione","Cura di tutta la parte visiva e della produzione video. In due mesi la riconoscibilità si costruisce con la coerenza delle immagini, non con la quantita dei post."],
+      ["Risultato","Enzo Pupillo è stato eletto sindaco di Lentini. Oltre 1,3 milioni di visualizzazioni e più di 43.000 interazioni in una città di poco più di venticinquemila abitanti. Su TikTok il 91,4% delle visualizzazioni e arrivato dai Per te, quindi pubblico nuovo e non già convinto."],
+      ["Lezione","Il pubblico che non ti sta ascoltando non lo raggiungi spingendo di più sul canale dove sei già. Lo raggiungi andando dove sta lui."]]},
+ {id:"05-fisicaro",cliente:"Giuseppe Fisicaro",tit:"Una corsa decisa da 197 voti",kpi:"1.022.809",kpiL:"visualizzazioni in un mese",settore:"Comunicazione politica",periodo:"apr / mag 2026",canali:"Facebook, Instagram, TikTok",fonte:"Meta, TikTok e risultati elettorali pubblici",
+  dati:[["197","Voti di scarto"],["1.022.809","Visualizzazioni"],["24.150","Interazioni"],["40.018","Visite ai profili"]],
+  cap:[["Problema","Una corsa a tre, con un candidato di coalizione che doveva tenere insieme due comunicazioni diverse: quella personale e quella delle liste che lo sostenevano. Due registri, due pubblici, un'unica identità da non far sembrare frammentata. E un vincolo secco, perché la data del voto non si sposta."],
+      ["Strategia","Comunicazione integrata su tre piattaforme, con identità e contenuti completamente autonomi. In parallelo il coordinamento tra la voce del candidato e quella delle liste, perché in una comunale il consenso passa anche dai candidati consiglieri."],
+      ["Produzione","Contenuti e video su Facebook, Instagram e TikTok, con presidio quotidiano per tutta la durata della campagna."],
+      ["Risultato","Oltre un milione di visualizzazioni in poco più di un mese. Su TikTok l'85,5% delle visualizzazioni dai Per te. All'urna: 2.701 voti contro i 2.898 del vincitore. 197 voti di distanza."],
+      ["Lezione","Questo caso non racconta una vittoria, e va detto. In una corsa decisa da 197 voti la comunicazione non è un accessorio, è esattamente il margine. Una campagna costruita bene mette il candidato nelle condizioni di giocarsela fino all'ultima scheda."]]},
+ {id:"06-rapisarda",cliente:"Luca Rapisarda",tit:"Costruire una figura pubblica da zero",kpi:"Eletto",kpiL:"consigliere comunale",settore:"Comunicazione politica",periodo:"set 2025 / ago 2026",canali:"Facebook, Instagram, TikTok",fonte:"Meta, TikTok e risultati elettorali pubblici",
+  dati:[["Eletto","Consigliere comunale"],["733.256","Visualizzazioni"],["8.646","Interazioni"],["21.134","Visite ai profili"]],
+  cap:[["Problema","Un imprenditore decide di candidarsi a sindaco. Non aveva una figura pubblica: nessuna riconoscibilità, nessun linguaggio proprio, nessun posizionamento. Poi, a percorso avviato, il problema più difficile: per dinamiche di coalizione la candidatura viene ritirata. È il momento in cui una campagna normalmente muore."],
+      ["Strategia","Due fasi. Costruire la figura, quindi l'immagine, il modo di parlare, i temi, le relazioni sul territorio. E poi riscrivere il racconto senza perdere le persone: il passo indietro andava comunicato per quello che era, una scelta di responsabilità e non un ritiro."],
+      ["Produzione","Personal branding completo, dall'abbigliamento al linguaggio, dai temi da presidiare alle collaborazioni con le attività del comune e con altri esponenti politici. Contenuti e video su tre canali per undici mesi."],
+      ["Risultato","Oltre 730.000 visualizzazioni, con il 92,4% delle views TikTok dai Per te. Il riposizionamento è passato: la stampa locale ha ripreso il messaggio nei termini in cui era stato costruito. Luca Rapisarda è stato eletto consigliere comunale."],
+      ["Lezione","Il momento che definisce un candidato non è quando tutto va secondo il piano. È quando il piano cambia. Una figura costruita con criterio regge un cambio di scenario, un'immagine improvvisata si rompe."]]}
+];
+
+
+const FAQ=[
+ ["Quanto costa?","I nostri percorsi sono pensati per esigenze diverse. Ma se la cifra che avevi in testa era duecento euro, siamo lontani, e preferiamo dirtelo adesso invece che scoprirlo alla firma."],
+ ["Per quanto tempo mi lego?","Sei mesi, perché sotto i sei mesi i dati non dicono niente di utile. Nessun rinnovo automatico che parte da solo: alla scadenza si decide insieme."],
+ ["Ho già provato con un'altra agenzia e non è cambiato niente.","È la frase che si legge più spesso nelle recensioni del settore. Di solito è successa una di due cose: nessuno ha definito cosa dovevi ottenere, oppure il lavoro è partito dallo strumento invece che dal problema. La prima domanda che ti faremo e cosa deve cambiare nella tua attività."],
+ ["Chi mi segue dopo la firma?","La stessa persona che ti ha parlato prima. È la domanda giusta da fare, perché nelle recensioni del settore la frase che ricorre di più è «sono spariti dopo la firma». Da noi hai un referente solo, e sai chi chiamare."],
+ ["Il sito e gli account restano miei?","Sì, sempre. Dominio, account e accessi sono intestati a te dal primo giorno. Se un giorno vai via, porti via tutto senza pagare niente."],
+ ["Come faccio a sapere che i risultati sono merito vostro?","Non puoi saperlo con certezza assoluta, e chi te lo promette sta mentendo. Quello che facciamo e dichiarare il periodo di confronto e la fonte di ogni numero, così puoi verificarlo da solo dentro i tuoi account."]
+];
+
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const ridotto=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ══════════ split del testo ══════════ */
+function rng(seed){let s=seed>>>0;return()=>(s=(s*1664525+1013904223)>>>0)/4294967296}
+function split(el,tipo,seed){
+  const testo=el.dataset.testo;
+  el.innerHTML='<span class="sr">'+testo+'</span>';
+  const vis=document.createElement('span');vis.setAttribute('aria-hidden','true');
+  const r=rng(seed);const parole=testo.split(' ');let ci=0;
+  const tot=testo.replace(/ /g,'').length;
+  parole.forEach((p,wi)=>{
+    const w=document.createElement('span');w.className='w';
+    if(tipo==='drift'||tipo==='rise')w.style.setProperty('--th',(wi/parole.length*0.5).toFixed(3));
+    [...p].forEach(ch=>{
+      const c=document.createElement('span');c.className='c';c.textContent=ch;
+      if(tipo==='scatter'){
+        c.style.setProperty('--th',(r()*0.55).toFixed(3));
+        c.style.setProperty('--jx',((r()-.5)*90).toFixed(1)+'px');
+        c.style.setProperty('--jy',((r()-.5)*70).toFixed(1)+'px');
+        c.style.setProperty('--jr',((r()-.5)*50).toFixed(1)+'deg');
+      }else if(tipo==='snap'){
+        c.style.setProperty('--th',(ci/tot*0.45+r()*0.06).toFixed(3));
+        c.style.setProperty('--jx',(-40-r()*60).toFixed(1)+'px');
+      }
+      ci++;w.appendChild(c);
+    });
+    vis.appendChild(w);
+    if(wi<parole.length-1)vis.appendChild(document.createTextNode(' '));
+  });
+  el.appendChild(vis);
+}
+const TIPI={'b-scatter':'scatter','b-drift':'drift','b-snap':'snap','b-rise':'rise'};
+$$('.stazione').forEach((el,i)=>{
+  const tipo=TIPI[[...el.classList].find(c=>TIPI[c])];
+  split($('.frase',el),tipo,7919+i*104729);
+});
+
+/* ══════════ casi ══════════ */
+const lista=$('#lista-casi');
+CASI.forEach((c,i)=>{
+  const b=document.createElement('button');
+  b.className='caso';b.type='button';
+  b.innerHTML=`<span class="n">${String(i+1).padStart(2,'0')}</span>
+    <span class="cli">${c.cliente}</span>
+    <span class="tit">${c.tit}</span>
+    <span class="kpi">${c.kpi}<small>${c.kpiL}</small></span>`;
+  b.addEventListener('click',()=>apriDossier(i));
+  lista.appendChild(b);
+});
+
+/* ══════════ team e faq ══════════ */
+const lf=$('#lista-faq');
+FAQ.forEach(([q,a])=>{
+  const d=document.createElement('details');d.className='q rv';
+  d.innerHTML=`<summary>${q}</summary><p>${a}</p>`;
+  lf.appendChild(d);
+});
+
+/* ══════════ tieni premuto ══════════ */
+const campo=$('#campo'),passi=$$('#passi li'),istruzione=$('#istruzione');
+const FRAMM=26;const frammenti=[];
+for(let i=0;i<FRAMM;i++){
+  const f=document.createElement('div');f.className='fr';f.setAttribute('aria-hidden','true');
+  const x=6+Math.random()*84,y=8+Math.random()*80,rot=(Math.random()-.5)*120;
+  f.dataset.x=x;f.dataset.y=y;f.dataset.rot=rot;
+  f.style.left=x+'%';f.style.top=y+'%';f.style.transform=`rotate(${rot}deg)`;
+  campo.appendChild(f);frammenti.push(f);
+}
+let g=0,tenendo=false,gRaf=null;
+function disegnaCampo(){
+  campo.style.setProperty('--g',g.toFixed(3));
+  frammenti.forEach((f,i)=>{
+    const x0=+f.dataset.x,y0=+f.dataset.y,r0=+f.dataset.rot;
+    const xt=10+(i/(FRAMM-1))*80, yt=50;
+    const x=x0+(xt-x0)*g, y=y0+(yt-y0)*g, r=r0*(1-g);
+    f.style.left=x+'%';f.style.top=y+'%';f.style.transform=`rotate(${r}deg)`;
+    f.style.opacity=(0.65+0.35*g).toFixed(2);
+  });
+  passi.forEach((li,i)=>li.classList.toggle('on',g>(i+1)*0.28));
+  if(g>=0.999&&istruzione.textContent!=='Fermo.')istruzione.textContent='Fermo.';
+  if(g<0.999&&istruzione.textContent==='Fermo.')istruzione.textContent='Premi e tieni premuto sul riquadro';
+}
+function loopCampo(){
+  const obiettivo=tenendo?1:0;
+  g+=(obiettivo-g)*(tenendo?0.055:0.09);
+  if(Math.abs(obiettivo-g)<0.002){g=obiettivo;gRaf=null;disegnaCampo();return}
+  disegnaCampo();gRaf=requestAnimationFrame(loopCampo);
+}
+function premi(e){if(e.pointerType==='mouse'&&e.cancelable)e.preventDefault();tenendo=true;if(gRaf===null)gRaf=requestAnimationFrame(loopCampo)}
+function molla(){tenendo=false;if(gRaf===null)gRaf=requestAnimationFrame(loopCampo)}
+campo.addEventListener('pointerdown',premi);
+addEventListener('pointerup',molla);
+campo.addEventListener('pointercancel',molla);
+campo.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();premi(e)}});
+campo.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')molla()});
+if(ridotto()){g=1;disegnaCampo()}else disegnaCampo();
+
+/* ══════════ reveal, metodo, firma ══════════ */
+const io=new IntersectionObserver(es=>es.forEach((e,i)=>{
+  if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*70);io.unobserve(e.target)}
+}),{threshold:.12,rootMargin:'0px 0px -50px 0px'});
+$$('.rv').forEach(e=>io.observe(e));
+
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){$$('.tappa').forEach((t,i)=>setTimeout(()=>t.classList.add('on'),i*140))}
+}),{threshold:.3}).observe($('#griglia-metodo'));
+
+$$('.firma').forEach(f=>new IntersectionObserver((es,ob)=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');ob.disconnect()}
+}),{threshold:.5}).observe(f));
+
+
+
+/* ── portfolio ── */
+const MARCHI=[
+  {f:'pagine/hollywood/p1.jpg',n:'Hollywood',s:'Rebranding',u:'brand-hollywood.html'},
+  {f:'pagine/luz-de-mar/p1.jpg',n:'Luz de Mar',s:'Brand identity',u:'brand-luz-de-mar.html'},
+  {f:'pagine/cba/p1.jpg',n:'Centro Benessere Animali',s:'Brand identity',u:'brand-cba.html'},
+  {f:'pagine/ct-service/p1.jpg',n:'CT Service',s:'Identità visiva',u:'brand-ct-service.html'},
+  {f:'pagine/badiula/p1.jpg',n:'Badiula',s:'Presentazione',u:'brand-badiula.html'}
+];
+const CLIENTI=['Peppe Nappa','Vogue Outlet Lentini','Ristorante Da Luigi','Gate 23 Padel Center','Badiula',
+ 'Hollywood Carlentini','Luz de Mar','Centro Benessere Animali','CT Service','Vittoria Gym','Agenzia Lo Faro',
+ 'Air Network','Electric Shop','AutoSesto','New Shanti','Skyline Catania','FM Service Group','Al Montana',
+ 'Iceberg Centro Surgelati','Edilizia Perfetto','Borgo Nocchiara','Kalamarè','Mediterraneo Augusta',
+ 'Centro Polisportivo Augusta','Scuola Calcio Ventimiglia','Sergio Ossino Immobiliare','Salvatore Cardillo'];
+const gm=$('#marchi');
+if(gm)MARCHI.forEach(m=>{
+  const a=document.createElement('a');a.className='marchio-card rv';a.href=m.u;
+  a.innerHTML='<img src="assets/brand/'+m.f+'" alt="'+m.n+'" loading="lazy" onerror="this.closest(\'.marchio-card\').remove()">'
+    +'<span><b>'+m.n+'</b><em>'+m.s+'</em></span>';
+  gm.appendChild(a);io.observe(a);
+});
+const gc=$('#clienti');
+if(gc)CLIENTI.forEach(n=>{
+  const d=document.createElement('span');d.className='cliente';d.textContent=n;gc.appendChild(d);
+});
+
+/* ── i numeri salgono da zero ── */
+function contatore(el){
+  const fine=parseFloat(el.dataset.a), div=parseFloat(el.dataset.div||1),
+        dec=parseInt(el.dataset.dec||0), suf=el.dataset.suf||'';
+  const t0=performance.now(), dur=1500;
+  (function tick(t){
+    const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+    const v=(fine/div)*e;
+    el.textContent=(dec?v.toFixed(dec).replace('.',','):Math.round(v).toLocaleString('it-IT'))+suf;
+    if(p<1)requestAnimationFrame(tick);
+  })(t0);
+}
+$$('.conta').forEach(el=>{
+  if(ridotto()){const d=parseInt(el.dataset.dec||0);const v=parseFloat(el.dataset.a)/parseFloat(el.dataset.div||1);
+    el.textContent=(d?v.toFixed(d).replace('.',','):Math.round(v).toLocaleString('it-IT'))+(el.dataset.suf||'');return}
+  new IntersectionObserver((es,ob)=>es.forEach(e=>{
+    if(e.isIntersecting){ob.disconnect();contatore(el)}
+  }),{threshold:.6}).observe(el);
+});
+
+
+/* ── il cursore del marchio segue il mouse ── */
+(function(){
+  if(!matchMedia('(pointer:fine)').matches)return;
+  const cur=$('#cursore');if(!cur)return;
+  document.documentElement.classList.add('cursore-nostro');
+  const APX=0.38, APY=0.14;               // dove sta la punta dentro il disegno
+  let mx=innerWidth/2,my=innerHeight/2,x=mx,y=my,raf=null;
+  const dolce=!ridotto();
+  function muovi(){
+    const k=dolce?0.22:1;
+    x+=(mx-x)*k;y+=(my-y)*k;
+    scrivi(x,y);
+    raf=(Math.abs(mx-x)>0.2||Math.abs(my-y)>0.2)?requestAnimationFrame(muovi):null;
+  }
+  function scrivi(px,py){
+    cur.style.transform='translate3d('+(px-30*APX).toFixed(1)+'px,'+(py-38*APY).toFixed(1)+'px,0)';
+  }
+  addEventListener('pointermove',e=>{
+    mx=e.clientX;my=e.clientY;
+    if(!cur.classList.contains('acceso')){cur.classList.add('acceso');x=mx;y=my;scrivi(mx,my)}
+    if(!dolce){x=mx;y=my;scrivi(mx,my)}
+    else if(raf===null)raf=requestAnimationFrame(muovi);
+    else scrivi(x+(mx-x)*0.5,y+(my-y)*0.5);
+    const t=e.target;
+    const cliccabile=t.closest&&t.closest('a,button,.caso,summary,input[type=range],.campo,.div');
+    cur.classList.toggle('sopra',!!cliccabile);
+  },{passive:true});
+  addEventListener('pointerdown',()=>cur.classList.add('premuto'));
+  addEventListener('pointerup',()=>cur.classList.remove('premuto'));
+  addEventListener('pointerleave',()=>cur.classList.remove('acceso'));
+  document.addEventListener('mouseleave',()=>cur.classList.remove('acceso'));
+})();
+
+/* ── la spina dell'ecosistema si accende ── */
+const spina=$('#spina');
+if(spina)new IntersectionObserver((es,ob)=>es.forEach(e=>{
+  if(e.isIntersecting){spina.classList.add('viva');ob.disconnect()}
+}),{threshold:.4}).observe(spina);
+
+/* ══════════ nav e pausa ══════════ */
+const nav=$('#nav');
+addEventListener('scroll',()=>{nav.classList.toggle('solida',scrollY>50)},{passive:true});
+addEventListener('visibilitychange',()=>document.body.classList.toggle('pausa',document.hidden));
+
+/* ══════════ modulo ══════════ */
+$('#modulo').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target;
+  const corpo=encodeURIComponent('Attività: '+f.attivita.value+'\nContatto: '+f.contatto.value+'\n\n'+f.messaggio.value);
+  location.href='mailto:info@freezestudio.it?subject='+encodeURIComponent('Richiesta da '+f.nome.value)+'&body='+corpo;
+  $('#esito').textContent='Ti abbiamo aperto la mail già scritta: premi invia dal tuo programma di posta.';
+});
+
+/* ══════════ movimento ridotto dal vivo ══════════ */
+matchMedia('(prefers-reduced-motion:reduce)').addEventListener('change',e=>{
+  if(e.matches){
+    if(gRaf!==null){cancelAnimationFrame(gRaf);gRaf=null}
+    g=1;tenendo=false;disegnaCampo();
+    $$('.tappa').forEach(t=>t.classList.add('on'));
+    $$('.firma').forEach(f=>f.classList.add('on'));
+    $$('.rv').forEach(el=>el.classList.add('in'));
+  }
+  modoEroe();
+});
+</script>
+<script src="assets/linea.js" defer></script>
+<script src="assets/dossier.js" defer></script>
+</body>
+</html>
