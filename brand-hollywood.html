@@ -21,9 +21,20 @@
 .chip{border:1px solid var(--linea);border-radius:99px;padding:9px 16px;font-family:var(--mono);
   font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary)}
 .chip.acc{border-color:rgba(246,33,136,.5);color:var(--accent)}
-.tavole{padding-bottom:clamp(60px,9vh,110px);display:flex;flex-direction:column;gap:clamp(14px,2vw,26px)}
+.tavole{padding-bottom:clamp(60px,9vh,110px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px)}
+@media(max-width:1000px){.tavole{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.tavole{grid-template-columns:1fr}}
+.tavola{cursor:zoom-in;transition:border-color .3s,transform .3s}
+.tavola:hover{border-color:rgba(246,33,136,.5);transform:translateY(-4px)}
+.luce{position:fixed;inset:0;z-index:80;background:rgba(11,13,18,.94);backdrop-filter:blur(14px);
+  display:none;align-items:center;justify-content:center;padding:3vmin}
+.luce.aperta{display:flex}
+.luce img{max-width:min(94vw,860px);max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--linea)}
+.luce .chiudi{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:99px;border:1px solid var(--linea);
+  background:rgba(11,13,18,.6);color:#EDF1F7;font-size:20px;line-height:1;cursor:pointer}
+.luce .chiudi:hover{border-color:var(--accent);color:var(--accent)}
 .tavola{border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:var(--panel)}
-.tavola img{width:100%;display:block}
+.tavola img{width:100%;height:auto;display:block}
 .conteggio{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6E7784;
   padding-bottom:16px}
 </style>
@@ -47,7 +58,7 @@
   </div></header>
   <section class="wrap">
     <p class="conteggio">8 tavole dal documento originale</p>
-    <div class="tavole"><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p1.jpg" alt="Hollywood, tavola 1" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p2.jpg" alt="Hollywood, tavola 2" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p3.jpg" alt="Hollywood, tavola 3" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p4.jpg" alt="Hollywood, tavola 4" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p5.jpg" alt="Hollywood, tavola 5" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p6.jpg" alt="Hollywood, tavola 6" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p7.jpg" alt="Hollywood, tavola 7" loading="lazy"></div><div class="tavola rv"><img width="1500" height="1125" src="assets/brand/pagine/hollywood/p8.jpg" alt="Hollywood, tavola 8" loading="lazy"></div></div>
+    <div class="tavole"><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p1.jpg" alt="Hollywood, tavola 1" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p2.jpg" alt="Hollywood, tavola 2" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p3.jpg" alt="Hollywood, tavola 3" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p4.jpg" alt="Hollywood, tavola 4" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p5.jpg" alt="Hollywood, tavola 5" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p6.jpg" alt="Hollywood, tavola 6" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p7.jpg" alt="Hollywood, tavola 7" loading="lazy"></div><div class="tavola rv"><img width="1500" height="844" src="assets/brand/pagine/hollywood/p8.jpg" alt="Hollywood, tavola 8" loading="lazy"></div></div>
   </section>
   <section class="finale"><div class="wrap">
     <h2 class="rv">Ti serve un marchio che regga anche fra dieci anni?</h2>
@@ -76,6 +87,23 @@ const oss=new IntersectionObserver(es=>es.forEach((e,i)=>{
   addEventListener('pointermove',e=>{cur.classList.add('acceso');
     cur.style.transform='translate3d('+(e.clientX-11.4)+'px,'+(e.clientY-5.3)+'px,0)';
     cur.classList.toggle('sopra',!!(e.target.closest&&e.target.closest('a,button')));},{passive:true});
+})();
+</script>
+<script>
+(function(){
+  const luce=document.createElement('div');luce.className='luce';luce.setAttribute('role','dialog');luce.setAttribute('aria-modal','true');luce.setAttribute('aria-label','Tavola ingrandita');
+  luce.innerHTML='<img alt=""><button class="chiudi" aria-label="Chiudi" type="button">\u00d7</button>';
+  document.body.appendChild(luce);
+  const grande=luce.querySelector('img');
+  let ultima=null;
+  function apri(t){const i=t.querySelector('img');grande.src=i.currentSrc||i.src;grande.alt=i.alt;
+    luce.classList.add('aperta');document.body.style.overflow='hidden';ultima=t;luce.querySelector('.chiudi').focus()}
+  function chiudi(){luce.classList.remove('aperta');document.body.style.overflow='';if(ultima)ultima.focus()}
+  document.querySelectorAll('.tavola').forEach(t=>{t.tabIndex=0;t.setAttribute('role','button');
+    t.addEventListener('click',()=>apri(t));
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();apri(t)}})});
+  luce.addEventListener('click',e=>{if(e.target!==grande)chiudi()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&luce.classList.contains('aperta'))chiudi()});
 })();
 </script>
 </body></html>
