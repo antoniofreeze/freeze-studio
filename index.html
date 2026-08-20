@@ -61,12 +61,27 @@ main,nav,footer{position:relative;z-index:1}
 /* ═════ nav ═════ */
 nav{position:fixed;inset:0 0 auto;z-index:60;border-bottom:1px solid transparent;transition:background .45s var(--e2),border-color .45s,backdrop-filter .45s}
 nav.solida{background:rgba(11,13,18,.8);backdrop-filter:blur(18px) saturate(1.5);border-bottom-color:var(--linea)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;max-width:none}
 .marchio{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.05em;text-decoration:none}
 .marchio i{display:block;width:22px;height:3px;background:var(--accent);border-radius:2px}
 .menu{display:flex;gap:6px;list-style:none}
 .menu a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:10px 14px;border-radius:99px;opacity:.72;transition:.3s var(--e2)}
 .menu a:hover{opacity:1;background:rgba(191,217,232,.09)}
+#prova,#portfolio,#metodo,#studio,#ecosistema,#team,#parliamone{scroll-margin-top:84px}
+.apri-menu{display:none;width:44px;height:44px;background:none;border:1px solid var(--linea);border-radius:99px;
+  cursor:pointer;place-items:center;padding:0}
+.apri-menu i{display:block;width:16px;height:2.5px;border-radius:2px;background:#EDF1F7;position:relative}
+.apri-menu i::after{content:"";position:absolute;left:0;top:6px;width:16px;height:2.5px;border-radius:2px;background:var(--accent)}
+.velo-menu{position:fixed;inset:0;z-index:70;background:rgba(11,13,18,.96);backdrop-filter:blur(16px) saturate(1.4);
+  display:none;flex-direction:column;justify-content:center;padding:0 30px}
+.velo-menu.aperto{display:flex}
+.velo-menu a{font-family:var(--display);font-weight:900;font-size:clamp(29px,8.6vw,42px);letter-spacing:-.04em;
+  text-decoration:none;color:#EDF1F7;padding:11px 0;display:flex;align-items:center;gap:15px}
+.velo-menu a::before{content:"";width:20px;height:3px;background:var(--accent);border-radius:2px;flex:none;
+  transform:scaleX(.45);transform-origin:left;transition:transform .3s var(--e1)}
+.velo-menu a:active::before,.velo-menu a:hover::before{transform:scaleX(1)}
+.velo-menu .chiudi-menu{position:absolute;top:15px;right:20px;width:44px;height:44px;border-radius:99px;
+  border:1px solid var(--linea);background:none;color:#EDF1F7;font-size:20px;line-height:1;cursor:pointer}
 
 /* ═════ EROE: LA LINEA ═════ */
 #eroe{position:relative;height:620vh}
@@ -402,10 +417,8 @@ footer{display:block;border-top:1px solid var(--linea);margin-top:0}
   .premi{grid-template-columns:1fr}
 }
 @media (max-width:760px){
-  .menu{gap:2px}
-  .menu li{display:none}
-  .menu li:first-child,.menu li:last-child{display:block}
-  .menu a{padding:9px 11px;font-size:10px;letter-spacing:.1em}
+  .menu{display:none}
+  .apri-menu{display:grid}
   .caso{grid-template-columns:34px 1fr 40px;row-gap:7px}
   .caso .tit,.caso .kpi{grid-column:2}
   .caso .kpi,.caso .kpi small{white-space:normal}
@@ -442,8 +455,19 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <li><a href="#team">Team</a></li>
       <li><a href="#parliamone">Contatti</a></li>
     </ul>
+    <button class="apri-menu" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="menu-mobile"><i></i></button>
   </div>
 </nav>
+<div id="menu-mobile" class="velo-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="chiudi-menu" type="button" aria-label="Chiudi il menu">×</button>
+  <a href="#prova">Casi studio</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#metodo">Metodo</a>
+  <a href="#studio">Studio</a>
+  <a href="#ecosistema">Ecosistema</a>
+  <a href="#team">Team</a>
+  <a href="#parliamone">Contatti</a>
+</div>
 
 <main id="main" tabindex="-1">
 
@@ -1011,6 +1035,27 @@ if(navigazione&&navigazione.type==='reload'&&'scrollRestoration' in history){
 function pulisciAncora(){setTimeout(()=>history.replaceState(null,'',location.pathname+location.search),80)}
 addEventListener('load',()=>{if(location.hash)pulisciAncora()});
 addEventListener('hashchange',pulisciAncora);
+
+/* ══════════ menu mobile ══════════ */
+const velo=$('#menu-mobile'), apriMenu=$('.apri-menu');
+function chiudiMenu(){velo.classList.remove('aperto');document.body.style.overflow='';apriMenu.setAttribute('aria-expanded','false')}
+apriMenu.addEventListener('click',()=>{
+  velo.classList.add('aperto');document.body.style.overflow='hidden';apriMenu.setAttribute('aria-expanded','true');
+  velo.querySelector('.chiudi-menu').focus();
+});
+velo.addEventListener('click',e=>{if(e.target===velo||e.target.closest('.chiudi-menu'))chiudiMenu()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&velo.classList.contains('aperto'))chiudiMenu()});
+
+/* le voci di menu scorrono alla sezione senza toccare l'indirizzo */
+$$('.menu a, .velo-menu a').forEach(a=>a.addEventListener('click',e=>{
+  const dest=a.getAttribute('href');
+  if(!dest||!dest.startsWith('#'))return;
+  const sez=document.querySelector(dest);
+  if(!sez)return;
+  e.preventDefault();
+  if(velo.classList.contains('aperto'))chiudiMenu();
+  sez.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});
+}));
 </script>
 <script src="assets/linea.js" defer></script>
 <script src="assets/dossier.js" defer></script>

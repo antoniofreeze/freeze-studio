@@ -33,7 +33,7 @@ main,nav,footer{position:relative;z-index:1}
 
 /* nav */
 nav{position:fixed;inset:0 0 auto;z-index:60;background:rgba(11,13,18,.82);backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid var(--linea)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;max-width:none}
 .marchio{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:900;font-size:19px;letter-spacing:-.05em;text-decoration:none}
 .marchio i{display:block;width:22px;height:3px;background:var(--accent);border-radius:2px}
 .indietro{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;
