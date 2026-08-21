@@ -367,6 +367,22 @@ footer{border-top:1px solid var(--linea);padding:34px 0;display:flex;justify-con
   opacity:0;transform:translateY(-4px);transition:.35s var(--e1)}
 .marchio-card:hover::after{opacity:1;transform:none}
 @media (hover:none){.marchio-card::after{opacity:1;transform:none}}
+.marchio-card.esterno::after{content:"Visita ↗"}
+.marchi.siti .marchio-card img{aspect-ratio:16/10;object-position:top}
+.progetti{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px)}
+.progetto{border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:var(--panel);
+  text-decoration:none;display:block;transition:transform .45s var(--e1),border-color .45s}
+.progetto:hover{transform:translateY(-6px);border-color:rgba(246,33,136,.5)}
+.progetto img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top;display:block;opacity:.92;transition:opacity .4s}
+.progetto:hover img{opacity:1}
+.progetto-corpo{padding:20px 22px 26px}
+.progetto-eti{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+.progetto-corpo h3{font-family:var(--display);font-weight:900;font-size:clamp(20px,2.4vw,28px);letter-spacing:-.035em;color:var(--text-primary);margin-top:10px}
+.progetto-corpo p{margin-top:10px;font-size:14.5px;line-height:1.55;color:var(--text-secondary)}
+.progetto-apri{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.progetto-apri::after{content:"→"}
+@media(max-width:760px){.progetti{grid-template-columns:1fr}}
 .clienti{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}
 .cliente{border:1px solid var(--linea);border-radius:99px;padding:10px 18px;
   font-family:var(--testo);font-weight:500;font-size:14.5px;color:var(--text-secondary);
@@ -632,6 +648,31 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
 
     <p class="d-tit rv">I marchi che abbiamo costruito</p>
     <div class="marchi" id="marchi"></div>
+
+    <p class="d-tit rv">I siti che abbiamo costruito</p>
+    <div class="marchi siti" id="siti"></div>
+
+    <p class="d-tit rv">I progetti raccontati a parte</p>
+    <div class="progetti">
+      <a class="progetto rv" href="progetto-cultura.html">
+        <img src="assets/siti/cultura.jpg" alt="Il sito di CULTURA" width="1200" height="750" loading="lazy">
+        <div class="progetto-corpo">
+          <p class="progetto-eti">Co-fondato con Badia Lost&amp;Found</p>
+          <h3>CULTURA</h3>
+          <p>La rete digitale e territoriale che racconta e connette persone, imprese, territori ed eccellenze. Nata dall'incontro tra Freeze Studio e Badia Lost&amp;Found.</p>
+          <span class="progetto-apri">Il progetto</span>
+        </div>
+      </a>
+      <a class="progetto rv" href="progetto-katowice.html">
+        <img src="assets/siti/katowice.jpg" alt="Il sito del World Cup Katowice Internationals" width="1200" height="750" loading="lazy">
+        <div class="progetto-corpo">
+          <p class="progetto-eti">Katowice · Polonia</p>
+          <h3>World Cup Katowice Internationals</h3>
+          <p>Il torneo benefico di calcio ed eSports che unisce giocatori da oltre 28 paesi nel nome dell'integrazione. Nostro il sito ufficiale in tre lingue.</p>
+          <span class="progetto-apri">Il progetto</span>
+        </div>
+      </a>
+    </div>
 
     <p class="d-tit rv">Con chi lavoriamo</p>
     <div class="clienti rv" id="clienti"></div>
@@ -905,13 +946,28 @@ const MARCHI=[
 const CLIENTI=['Peppe Nappa','Vogue Outlet Lentini','Ristorante Da Luigi','Gate 23 Padel Center','Badiula','Ecosolution Italia',
  'Hollywood Carlentini','Luz de Mar','Centro Benessere Animali','Agenzia Lo Faro',
  'Air Network','Electric Shop','AutoSesto','New Shanti','Skyline Catania','FM Service Group',
- 'Centro Polisportivo Augusta','Salvatore Cardillo'];
+ 'Centro Polisportivo Augusta','Salvatore Cardillo','Villa Aurelia','Elisabeth Fashion','3F Illuminazione'];
 const gm=$('#marchi');
 if(gm)MARCHI.forEach(m=>{
   const a=document.createElement('a');a.className='marchio-card rv';a.href=m.u;
   a.innerHTML='<img src="assets/brand/'+m.f+'" alt="'+m.n+'" loading="lazy" onerror="this.closest(\'.marchio-card\').remove()">'
     +'<span><b>'+m.n+'</b><em>'+m.s+'</em></span>';
   gm.appendChild(a);io.observe(a);
+});
+const SITI=[
+  {f:'villa-aurelia.jpg',n:'Villa Aurelia',s:'Casa vacanze · Villasmundo',u:'https://www.villaaureliaholiday.com'},
+  {f:'polisportivo-augusta.jpg',n:'Centro Polisportivo Augusta',s:'Sport e benessere · Augusta',u:'https://centropolisportivoaugusta.it'},
+  {f:'elisabeth-fashion.jpg',n:'Elisabeth Fashion',s:'E-commerce moda · Aci Catena',u:'https://elisabethfashion.com'},
+  {f:'3f-illuminazione.jpg',n:'3F Illuminazione',s:'Illuminotecnica · Misterbianco',u:'https://www.3filluminazione.com'},
+  {f:'cultura.jpg',n:'CULTURA',s:'Rete editoriale · culturahub.it',u:'https://culturahub.it'},
+  {f:'katowice.jpg',n:'World Cup Katowice Internationals',s:'Evento internazionale · Polonia',u:'https://worldcupkatowiceinternationals.eu'}
+];
+const gs=$('#siti');
+if(gs)SITI.forEach(m=>{
+  const a=document.createElement('a');a.className='marchio-card esterno rv';a.href=m.u;a.target='_blank';a.rel='noopener';
+  a.innerHTML='<img src="assets/siti/'+m.f+'" alt="Il sito di '+m.n+'" loading="lazy">'
+    +'<span><b>'+m.n+'</b><em>'+m.s+'</em></span>';
+  gs.appendChild(a);io.observe(a);
 });
 const gc=$('#clienti');
 if(gc)CLIENTI.forEach(n=>{
