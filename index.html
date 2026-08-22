@@ -368,20 +368,35 @@ footer{border-top:1px solid var(--linea);padding:34px 0;display:flex;justify-con
 @media (hover:none){.marchio-card::after{opacity:1;transform:none}}
 .marchio-card.esterno::after{content:"Visita ↗"}
 .marchi.siti .marchio-card img{aspect-ratio:16/10;object-position:top}
-.progetti{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px)}
-.progetto{border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:var(--panel);
-  text-decoration:none;display:block;transition:transform .45s var(--e1),border-color .45s}
-.progetto:hover{transform:translateY(-6px);border-color:rgba(246,33,136,.5)}
-.progetto img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top;display:block;opacity:.92;transition:opacity .4s}
-.progetto:hover img{opacity:1}
-.progetto-corpo{padding:20px 22px 26px}
-.progetto-eti{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
-.progetto-corpo h3{font-family:var(--display);font-weight:900;font-size:clamp(20px,2.4vw,28px);letter-spacing:-.035em;color:var(--text-primary);margin-top:10px}
-.progetto-corpo p{margin-top:10px;font-size:14.5px;line-height:1.55;color:var(--text-secondary)}
-.progetto-apri{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.progetto-apri::after{content:"→"}
-@media(max-width:760px){.progetti{grid-template-columns:1fr}}
+/* fasce progetto: CULTURA nei suoi colori, Katowice internazionale */
+.faro{margin-top:clamp(26px,4vh,44px);border-radius:14px;overflow:hidden;border:1px solid var(--linea);
+  display:grid;grid-template-columns:1.1fr 1fr;align-items:stretch}
+.faro img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;min-height:100%}
+.faro-corpo{padding:clamp(26px,4vw,56px);align-self:center}
+.faro-eti{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.faro h3{font-family:var(--display);font-weight:900;font-size:clamp(26px,3.6vw,46px);letter-spacing:-.04em;margin-top:12px}
+.faro p{margin-top:13px;line-height:1.62;font-size:15.5px;max-width:52ch}
+.faro-azioni{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.faro.cultura{background:#FFF6EF;border-color:rgba(255,118,32,.4)}
+.faro.cultura .faro-eti{color:#FF4B33}
+.faro.cultura h3{color:#1C1208}
+.faro.cultura p{color:#5F5348}
+.faro.cultura .filo{width:46px;height:4px;background:#FF7620;border-radius:2px;margin-top:15px}
+.bottone-cultura{display:inline-block;background:#FF7620;color:#fff;border-radius:99px;padding:13px 24px;
+  text-decoration:none;font-weight:600;font-size:14px;transition:background .3s var(--e2)}
+.bottone-cultura:hover{background:#FF4B33}
+.filo-link{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:#FF4B33;text-decoration:none;border-bottom:1px solid rgba(255,75,51,.4);padding-bottom:2px}
+.filo-link:hover{border-color:#FF4B33}
+.faro.internazionale{background:var(--panel)}
+.faro.internazionale .faro-eti{color:var(--accent)}
+.faro.internazionale h3{color:var(--text-primary)}
+.faro.internazionale p{color:var(--text-secondary)}
+@media(max-width:860px){
+  .faro{grid-template-columns:1fr}
+  .faro img{max-height:300px;min-height:0}
+  .faro.internazionale img{order:-1}
+}
 .clienti{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}
 .cliente{border:1px solid var(--linea);border-radius:99px;padding:10px 18px;
   font-family:var(--testo);font-weight:500;font-size:14.5px;color:var(--text-secondary);
@@ -651,26 +666,25 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
     <p class="d-tit rv">Alcuni dei siti che abbiamo costruito</p>
     <div class="marchi siti" id="siti"></div>
 
-    <p class="d-tit rv">I progetti raccontati a parte</p>
-    <div class="progetti">
-      <a class="progetto rv" href="progetto-cultura.html">
-        <img src="assets/siti/cultura.jpg" alt="Il sito di CULTURA" width="1200" height="750" loading="lazy">
-        <div class="progetto-corpo">
-          <p class="progetto-eti">Co-fondato con Badia Lost&amp;Found</p>
-          <h3>CULTURA</h3>
-          <p>La rete digitale e territoriale che racconta e connette persone, imprese, territori ed eccellenze. Nata dall'incontro tra Freeze Studio e Badia Lost&amp;Found.</p>
-          <span class="progetto-apri">Il progetto</span>
-        </div>
-      </a>
-      <a class="progetto rv" href="progetto-katowice.html">
-        <img src="assets/siti/katowice.jpg" alt="Il sito del World Cup Katowice Internationals" width="1200" height="750" loading="lazy">
-        <div class="progetto-corpo">
-          <p class="progetto-eti">Katowice · Polonia</p>
-          <h3>World Cup Katowice Internationals</h3>
-          <p>Il torneo benefico di calcio ed eSports che unisce giocatori da oltre 28 paesi nel nome dell'integrazione. Nostro il sito ufficiale in tre lingue.</p>
-          <span class="progetto-apri">Il progetto</span>
-        </div>
-      </a>
+    <div class="faro cultura rv">
+      <div class="faro-corpo">
+        <p class="faro-eti">Progetto CULTURA · Co-fondato con Badia Lost&amp;Found</p>
+        <h3>Le storie che generano valore.</h3>
+        <div class="filo" aria-hidden="true"></div>
+        <p>Una rete digitale e territoriale che racconta, valorizza e connette persone, imprese, territori ed eccellenze. Non un cliente: un progetto che abbiamo fondato insieme a Badia Lost&amp;Found, con un'identità tutta sua.</p>
+        <div class="faro-azioni"><a class="bottone-cultura" href="progetto-cultura.html">Il progetto</a><a class="filo-link" href="https://culturahub.it" target="_blank" rel="noopener">culturahub.it ↗</a></div>
+      </div>
+      <img src="assets/siti/cultura.jpg" alt="Il sito di CULTURA" width="1200" height="750" loading="lazy">
+    </div>
+
+    <div class="faro internazionale rv">
+      <img src="assets/siti/katowice.jpg" alt="Il sito del World Cup Katowice Internationals" width="1200" height="750" loading="lazy">
+      <div class="faro-corpo">
+        <p class="faro-eti">Progetto internazionale · Katowice, Polonia</p>
+        <h3>Anche fuori dall'Italia.</h3>
+        <p>Il World Cup Katowice Internationals è il torneo benefico di calcio ed eSports che unisce giocatori da oltre 28 paesi nel nome dell'integrazione. Nostro il sito ufficiale in tre lingue — la prova che il metodo regge anche su scala internazionale, e al servizio di una causa.</p>
+        <div class="faro-azioni"><a class="bottone" href="progetto-katowice.html">Il progetto</a></div>
+      </div>
     </div>
 
     <p class="d-tit rv">Con chi lavoriamo</p>
