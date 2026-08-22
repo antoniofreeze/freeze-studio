@@ -32,6 +32,19 @@
 .telefono{border:1px solid var(--linea);border-radius:18px;overflow:hidden;background:#000}
 .telefono video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#000}
 @media(max-width:700px){.telefoni{grid-template-columns:1fr}}
+.galleria{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,26px)}
+.foto{border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:var(--panel);cursor:zoom-in;
+  transition:border-color .3s,transform .3s}
+.foto:hover{border-color:rgba(246,33,136,.5);transform:translateY(-4px)}
+.foto img{width:100%;height:auto;display:block}
+.foto.larga{grid-column:1/-1}
+@media(max-width:640px){.galleria{grid-template-columns:1fr}}
+.luce{position:fixed;inset:0;z-index:80;background:rgba(11,13,18,.94);backdrop-filter:blur(14px);
+  display:none;align-items:center;justify-content:center;padding:3vmin}
+.luce.aperta{display:flex}
+.luce img{max-width:94vw;max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--linea)}
+.luce .chiudi{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:99px;border:1px solid var(--linea);
+  background:rgba(11,13,18,.6);color:#EDF1F7;font-size:20px;line-height:1;cursor:pointer}
 .fatti{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px}
 .fatto{border:1px solid var(--linea);border-radius:10px;padding:18px}
 .fatto b{font-family:var(--display);font-weight:900;font-size:clamp(17px,2vw,22px);letter-spacing:-.03em;display:block}
@@ -64,6 +77,17 @@
     <div class="telefoni">
       <div class="telefono rv"><video src="assets/progetti/fasted/evento-v1.mp4" poster="assets/progetti/fasted/evento-v1.jpg" controls playsinline preload="none"></video></div>
       <div class="telefono rv"><video src="assets/progetti/fasted/evento-v2.mp4" poster="assets/progetti/fasted/evento-v2.jpg" controls playsinline preload="none"></video></div>
+    </div>
+  </section>
+  <section class="wrap blocco">
+    <p class="blocco-eti">La serata, nelle foto</p>
+    <h2>Le luci accese, una per una.</h2>
+    <div class="galleria">
+      <div class="foto larga rv"><img width="1800" height="1200" src="assets/progetti/fasted/foto1.jpg" alt="La platea del teatro con le luci dei telefoni accese" loading="lazy"></div>
+      <div class="foto rv"><img width="1400" height="933" src="assets/progetti/fasted/foto2.jpg" alt="La cantante sul palco davanti al fondale scintillante" loading="lazy"></div>
+      <div class="foto rv"><img width="1400" height="933" src="assets/progetti/fasted/foto3.jpg" alt="Il palco illuminato di blu durante l'esibizione" loading="lazy"></div>
+      <div class="foto rv"><img width="1400" height="933" src="assets/progetti/fasted/foto4.jpg" alt="Gli organizzatori in platea con il teatro pieno alle spalle" loading="lazy"></div>
+      <div class="foto rv"><img width="1400" height="933" src="assets/progetti/fasted/foto5.jpg" alt="Il gruppo di volontari e donatori sul palco a fine serata" loading="lazy"></div>
     </div>
   </section>
   <section class="wrap blocco spazio-fine">
@@ -99,6 +123,20 @@ const oss=new IntersectionObserver(es=>es.forEach((e,i)=>{
 document.querySelectorAll('.telefono video').forEach(v=>{
   v.addEventListener('play',()=>{document.querySelectorAll('.telefono video').forEach(a=>{if(a!==v)a.pause()})});
 });
+(function(){
+  const luce=document.createElement('div');luce.className='luce';luce.setAttribute('role','dialog');luce.setAttribute('aria-modal','true');luce.setAttribute('aria-label','Foto ingrandita');
+  luce.innerHTML='<img alt=""><button class="chiudi" aria-label="Chiudi" type="button">×</button>';
+  document.body.appendChild(luce);
+  const grande=luce.querySelector('img');
+  function apri(t){const i=t.querySelector('img');grande.src=i.currentSrc||i.src;grande.alt=i.alt;
+    luce.classList.add('aperta');document.body.style.overflow='hidden'}
+  function chiudi(){luce.classList.remove('aperta');document.body.style.overflow=''}
+  document.querySelectorAll('.foto').forEach(t=>{t.tabIndex=0;t.setAttribute('role','button');
+    t.addEventListener('click',()=>apri(t));
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();apri(t)}})});
+  luce.addEventListener('click',e=>{if(e.target!==grande)chiudi()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&luce.classList.contains('aperta'))chiudi()});
+})();
 (function(){
   if(!matchMedia('(pointer:fine)').matches)return;
   const cur=document.getElementById('cursore');if(!cur)return;
