@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>App OAPPC Catania | Un progetto Freeze Studio</title>
+<meta name="description" content="L'app dell'Ordine degli Architetti PPC della provincia di Catania: accreditamento dei corsi con badge, notifiche ufficiali, documenti e profilo con QR code. Distribuita da Freeze Studio.">
+<meta name="theme-color" content="#0B0D12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0D12'/%3E%3Crect x='5' y='14.5' width='22' height='3.4' rx='1.7' fill='%23F62188'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Instrument+Sans:wght@400;500&family=Azeret+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/pagina.css">
+<style>
+.marca{padding:clamp(120px,16vh,180px) 0 clamp(34px,5vh,60px)}
+.marca .logo-cliente{width:clamp(150px,22vw,240px);height:auto;display:block;margin-bottom:26px;opacity:.96}
+.marca h1{font-size:clamp(36px,6.8vw,96px);letter-spacing:-.05em;line-height:.96;margin-top:6px}
+.marca .tipo{margin-top:18px;font-size:clamp(17px,2vw,26px);color:var(--text-primary);font-weight:500;max-width:34ch;line-height:1.3}
+.marca .riga{height:3px;background:var(--accent);border-radius:2px;margin-top:30px;transform:scaleX(0);transform-origin:left;
+  animation:stendi 1.2s var(--e1) forwards .3s}
+@keyframes stendi{to{transform:scaleX(1)}}
+.dettagli{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.chip{border:1px solid var(--linea);border-radius:99px;padding:9px 16px;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary)}
+.chip.acc{border-color:rgba(246,33,136,.5);color:var(--accent)}
+.blocco{padding:clamp(34px,6vh,70px) 0 0}
+.blocco-eti{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-secondary);
+  display:flex;align-items:center;gap:10px}
+.blocco-eti::before{content:"";width:18px;height:2px;background:var(--accent);border-radius:2px;flex:none}
+.blocco h2{font-family:var(--display);font-weight:900;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.04em;margin-top:14px;max-width:24ch}
+.blocco p{margin-top:14px;max-width:64ch;line-height:1.65;color:var(--text-secondary);font-size:16px}
+.blocco p strong{color:var(--text-primary);font-weight:500}
+.funzioni{margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,340px));gap:12px}
+.funzione{border:1px solid var(--linea);border-radius:10px;padding:16px 18px;display:flex;align-items:baseline;gap:12px}
+.funzione i{width:16px;height:2px;background:var(--accent);border-radius:2px;flex:none;transform:translateY(-4px)}
+.funzione span{color:var(--text-primary);font-size:15px;line-height:1.45}
+@media(max-width:700px){.funzioni{grid-template-columns:1fr}}
+.tavole{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px)}
+@media(max-width:1000px){.tavole{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.tavole{grid-template-columns:repeat(2,1fr)}}
+.tavola{border:1px solid var(--linea);border-radius:10px;overflow:hidden;background:var(--panel);cursor:zoom-in;
+  transition:border-color .3s,transform .3s}
+.tavola:hover{border-color:rgba(246,33,136,.5);transform:translateY(-4px)}
+.tavola img{width:100%;height:auto;display:block}
+.luce{position:fixed;inset:0;z-index:80;background:rgba(11,13,18,.94);backdrop-filter:blur(14px);
+  display:none;align-items:center;justify-content:center;padding:3vmin}
+.luce.aperta{display:flex}
+.luce img{max-width:min(94vw,860px);max-height:92vh;width:auto;height:auto;border-radius:10px;border:1px solid var(--linea)}
+.luce .chiudi{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:99px;border:1px solid var(--linea);
+  background:rgba(11,13,18,.6);color:#EDF1F7;font-size:20px;line-height:1;cursor:pointer}
+.fatti{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px}
+.fatto{border:1px solid var(--linea);border-radius:10px;padding:18px}
+.fatto b{font-family:var(--display);font-weight:900;font-size:clamp(17px,2vw,22px);letter-spacing:-.03em;display:block}
+.fatto span{display:block;margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary)}
+@media(max-width:700px){.fatti{grid-template-columns:1fr}}
+.spazio-fine{padding-bottom:clamp(60px,9vh,110px)}
+</style>
+</head>
+<body>
+<a class="salta" href="#main">Vai al contenuto</a>
+<div id="cursore" aria-hidden="true"><img src="assets/cursore.svg" alt=""></div>
+<div class="ambiente" aria-hidden="true"></div>
+<nav><div class="wrap">
+  <a class="marchio" href="index.html">freeze<i aria-hidden="true"></i>studio</a>
+  <a class="indietro" href="index.html#portfolio">Torna al portfolio</a>
+</div></nav>
+<main id="main" tabindex="-1">
+  <header class="marca"><div class="wrap">
+    <img class="logo-cliente" src="assets/progetti/oappct/logo.png" alt="Il logo dell'Ordine degli Architetti PPC di Catania" width="881" height="459">
+    <p class="occhiello">App istituzionale</p>
+    <h1>L'app dell'Ordine degli Architetti di Catania</h1>
+    <p class="tipo">Formazione, crediti, comunicazioni e identità professionale. Tutto l'Ordine, in una tasca.</p>
+    <div class="riga"></div>
+    <p class="lede">L'Ordine degli Architetti, Pianificatori, Paesaggisti e Conservatori della provincia di Catania aveva bisogno di digitalizzare i processi: la gestione dei corsi di formazione e del loro accreditamento, le comunicazioni ufficiali puntuali, la verifica dell'iscrizione durante gli eventi istituzionali. Le informazioni vivevano sparse tra siti, documenti e procedure manuali. La risposta è un'app dedicata che centralizza tutto.</p>
+    <div class="dettagli"><span class="chip acc">App per gli iscritti</span><span class="chip">Accreditamento corsi</span><span class="chip">Badge e QR code</span><span class="chip">Notifiche push</span><span class="chip">Documenti e certificazioni</span><span class="chip">cmsLABS × Freeze Studio</span></div>
+  </div></header>
+  <section class="wrap blocco">
+    <p class="blocco-eti">La soluzione</p>
+    <h2>Un'app che fa ordine, per l'Ordine.</h2>
+    <p>Per l'ente, processi che si gestiscono da soli. Per i professionisti, un accesso ordinato e immediato a tutte le informazioni che contano:</p>
+    <div class="funzioni">
+      <div class="funzione"><i aria-hidden="true"></i><span><strong>Accreditamento automatico ai corsi</strong> con sistema di badge</span></div>
+      <div class="funzione"><i aria-hidden="true"></i><span><strong>Notifiche push</strong> per le comunicazioni ufficiali, in tempo reale</span></div>
+      <div class="funzione"><i aria-hidden="true"></i><span><strong>Documenti e certificazioni</strong> scaricabili dall'app</span></div>
+      <div class="funzione"><i aria-hidden="true"></i><span><strong>Profilo personale con QR code</strong> per la verifica dell'identità professionale</span></div>
+    </div>
+  </section>
+  <section class="wrap blocco">
+    <p class="blocco-eti">L'app, dal vivo</p>
+    <h2>Le notizie, il menu, l'identità.</h2>
+    <div class="tavole">
+      <div class="tavola rv"><img width="1080" height="1350" src="assets/progetti/oappct/m1.jpg" alt="La sezione notizie dell'app con le comunicazioni ufficiali e gli eventi formativi" loading="lazy"></div>
+      <div class="tavola rv"><img width="1080" height="1350" src="assets/progetti/oappct/m3.jpg" alt="Il menu dell'app con notizie, profilo, contatti e info" loading="lazy"></div>
+      <div class="tavola rv"><img width="1080" height="1350" src="assets/progetti/oappct/m2.jpg" alt="La schermata info dell'app: realizzata da cmsLABS e distribuita da Freeze Studio" loading="lazy"></div>
+    </div>
+  </section>
+  <section class="wrap blocco spazio-fine">
+    <p class="blocco-eti">Il lavoro di Freeze</p>
+    <h2>Dal problema dell'ente al telefono del professionista.</h2>
+    <p>Il progetto è nato dentro l'ecosistema Freeze: sviluppata insieme al partner tecnologico <strong>cmsLABS</strong> e distribuita da <strong>Freeze Studio</strong>, l'app snellisce il lavoro della segreteria dell'Ordine e dà agli iscritti un punto d'accesso unico — la dimostrazione che il metodo con cui costruiamo la comunicazione regge anche quando il prodotto è un servizio digitale istituzionale.</p>
+    <div class="fatti">
+      <div class="fatto"><b>Un solo punto</b><span>Tutti i servizi dell'Ordine</span></div>
+      <div class="fatto"><b>QR code</b><span>L'identità professionale, verificabile</span></div>
+      <div class="fatto"><b>cmsLABS × Freeze</b><span>Sviluppo e distribuzione</span></div>
+    </div>
+  </section>
+  <section class="finale"><div class="wrap">
+    <h2 class="rv">Anche il tuo ente merita un'app che funzioni?</h2>
+    <a class="bottone" href="index.html#parliamone">Parliamone</a>
+  </div></section>
+</main>
+<footer>
+  <div class="wrap piede">
+    <div class="piede-col"><span class="marchio" style="font-size:20px">freeze<i aria-hidden="true"></i>studio</span>
+      <p>Uno studio strategico che parte dal problema, non dallo strumento.</p></div>
+    <div class="piede-col"><p class="piede-eti">Dove siamo</p><p>Via Livorno 3<br>95127 Catania</p></div>
+    <div class="piede-col"><p class="piede-eti">Scrivici</p>
+      <p><a href="mailto:info@freezestudio.it">info@freezestudio.it</a><br><a href="tel:+390952905009">+39 095 2905009</a></p></div>
+  </div>
+  <div class="wrap piede-basso"><span>Freeze Studio S.n.c.</span><span>P.IVA e C.F. 06230830876</span></div>
+</footer>
+<script>
+const oss=new IntersectionObserver(es=>es.forEach((e,i)=>{
+  if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*60);oss.unobserve(e.target)}
+}),{threshold:.08,rootMargin:'0px 0px -60px 0px'});
+[...document.querySelectorAll('.rv')].forEach(e=>oss.observe(e));
+(function(){
+  const luce=document.createElement('div');luce.className='luce';luce.setAttribute('role','dialog');luce.setAttribute('aria-modal','true');luce.setAttribute('aria-label','Immagine ingrandita');
+  luce.innerHTML='<img alt=""><button class="chiudi" aria-label="Chiudi" type="button">×</button>';
+  document.body.appendChild(luce);
+  const grande=luce.querySelector('img');
+  function apri(t){const i=t.querySelector('img');grande.src=i.currentSrc||i.src;grande.alt=i.alt;
+    luce.classList.add('aperta');document.body.style.overflow='hidden'}
+  function chiudi(){luce.classList.remove('aperta');document.body.style.overflow=''}
+  document.querySelectorAll('.tavola').forEach(t=>{t.tabIndex=0;t.setAttribute('role','button');
+    t.addEventListener('click',()=>apri(t));
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();apri(t)}})});
+  luce.addEventListener('click',e=>{if(e.target!==grande)chiudi()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&luce.classList.contains('aperta'))chiudi()});
+})();
+(function(){
+  if(!matchMedia('(pointer:fine)').matches)return;
+  const cur=document.getElementById('cursore');if(!cur)return;
+  document.documentElement.classList.add('cursore-nostro');
+  addEventListener('pointermove',e=>{cur.classList.add('acceso');
+    cur.style.transform='translate3d('+(e.clientX-11.4)+'px,'+(e.clientY-5.3)+'px,0)';
+    cur.classList.toggle('sopra',!!(e.target.closest&&e.target.closest('a,button')));},{passive:true});
+})();
+</script>
+</body></html>
