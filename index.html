@@ -346,6 +346,10 @@ footer{border-top:1px solid var(--linea);padding:34px 0;display:flex;justify-con
   margin-top:12px;color:var(--inchiostro)}
 .attesa-team p:not(.attesa-eti){margin:14px auto 0;max-width:46ch;line-height:1.6;color:#54505F;font-size:16px}
 .attesa-team .bottone{margin-top:24px;position:relative;z-index:1}
+.social-fila{margin-top:18px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.social-fila a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--inchiostro);text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px;transition:color .3s}
+.social-fila a:hover{color:var(--accent-scuro)}
 
 /* ── ritratto del team ── */
 .ritratto-team{margin-top:clamp(32px,4.5vh,52px);position:relative;border-radius:12px;overflow:hidden;
@@ -418,7 +422,7 @@ footer{border-top:1px solid var(--linea);padding:34px 0;display:flex;justify-con
 
 /* ── piè di pagina ── */
 footer{display:block;border-top:1px solid var(--linea);margin-top:0}
-.piede{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(24px,3vw,48px);
+.piede{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:clamp(24px,3vw,48px);
   padding:clamp(46px,6vh,72px) clamp(20px,4.4vw,72px)}
 .piede-col p{font-size:14.5px;line-height:1.7;color:var(--text-secondary);margin-top:12px}
 .piede-col a{text-decoration:none;transition:color .3s}
@@ -745,6 +749,11 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <h3>Il nuovo shooting del team è in arrivo.</h3>
       <p>Stiamo preparando le foto nuove di tutta la squadra e dello studio. Seguici sui social: le vedrai lì per primo.</p>
       <a class="bottone" href="https://www.instagram.com/freezestudio.it/" target="_blank" rel="noopener">Seguici su Instagram ↗</a>
+      <div class="social-fila">
+        <a href="https://www.tiktok.com/@freeze.studio" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61574042810620" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.linkedin.com/company/freezestudiomarketing/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
     </div>
   </div>
 </section>
@@ -792,6 +801,8 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <p><a href="mailto:info@freezestudio.it">info@freezestudio.it</a><br>
          <a href="tel:+390952905009">+39 095 2905009</a></p>
     </div>
+    <div class="piede-col"><p class="piede-eti">Seguici</p>
+      <p><a href="https://www.instagram.com/freezestudio.it/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.tiktok.com/@freeze.studio" target="_blank" rel="noopener">TikTok</a><br><a href="https://www.facebook.com/profile.php?id=61574042810620" target="_blank" rel="noopener">Facebook</a><br><a href="https://www.linkedin.com/company/freezestudiomarketing/" target="_blank" rel="noopener">LinkedIn</a></p></div>
     <div class="piede-col">
       <p class="piede-eti">L'ecosistema</p>
       <p><a href="#studio">Studio</a><br><a href="https://www.freezeformazione.it" target="_blank" rel="noopener">Formazione</a><br>

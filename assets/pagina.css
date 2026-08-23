@@ -86,7 +86,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:7
 .bottone:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 14px 34px -12px rgba(246,33,136,.6)}
 
 footer{border-top:1px solid var(--linea)}
-.piede{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:clamp(24px,3vw,48px);padding:clamp(40px,6vh,64px) clamp(20px,4.4vw,72px)}
+.piede{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(24px,3vw,48px);padding:clamp(40px,6vh,64px) clamp(20px,4.4vw,72px)}
 .piede-col p{font-size:14.5px;line-height:1.7;color:var(--text-secondary);margin-top:12px}
 .piede-col a{text-decoration:none;transition:color .3s}
 .piede-col a:hover{color:var(--accent)}
