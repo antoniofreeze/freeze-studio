@@ -196,7 +196,7 @@
 
         <div class="d-sezione">
           <p class="d-titoletto">I contenuti</p>
-          <div class="telefoni">${[1,2,3,4].map(n=>player(c.id,n)).join('')}</div>
+          <div class="telefoni">${Array.from({length:13},(_,i)=>i+1).map(n=>player(c.id,n)).join('')}</div>
         </div>
 
         <div class="d-sezione">
