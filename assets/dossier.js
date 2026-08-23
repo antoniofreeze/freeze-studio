@@ -70,6 +70,7 @@
   .vol{width:52px;accent-color:var(--accent);cursor:pointer}
 
     .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px}
+  @media(max-width:640px){.strip{grid-template-columns:repeat(2,1fr)}}
   .strip.singola{display:block;max-width:300px}
   .strip.singola img{aspect-ratio:auto;height:auto;filter:none;border:1px solid var(--linea-chiara)}
   .d-nota{margin-top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;
