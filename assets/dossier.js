@@ -202,7 +202,7 @@
 
         <div class="d-sezione">
           <p class="d-titoletto">Dal lavoro</p>
-          <div class="strip">${Array.from({length:17},(_,i)=>i+1).map(n=>`<img src="assets/casi/${c.id}/f${n}.jpg" alt="" loading="lazy" width="1600" height="2000" onerror="this.remove()">`).join('')}</div>
+          <div class="strip">${Array.from({length:18},(_,i)=>i+1).map(n=>`<img src="assets/casi/${c.id}/f${n}.jpg" alt="" loading="lazy" width="1600" height="2000" onerror="this.remove()">`).join('')}</div>
           ${c.notaFoto?`<p class="d-nota">${c.notaFoto}</p>`:''}
         </div>
 
