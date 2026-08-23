@@ -336,6 +336,17 @@ footer{border-top:1px solid var(--linea);padding:34px 0;display:flex;justify-con
 
 
 
+/* ── attesa del team: stay tuned ── */
+.attesa-team{margin-top:clamp(32px,4.5vh,52px);border:1.5px dashed rgba(11,13,18,.3);border-radius:14px;
+  padding:clamp(36px,6vw,72px) clamp(22px,4vw,56px);text-align:center;position:relative;overflow:hidden}
+.attesa-team::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 120% at 50% 130%,rgba(246,33,136,.09),transparent 65%)}
+.attesa-eti{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-scuro)}
+.attesa-team h3{font-family:var(--display);font-weight:900;font-size:clamp(24px,3.6vw,44px);letter-spacing:-.04em;
+  margin-top:12px;color:var(--inchiostro)}
+.attesa-team p:not(.attesa-eti){margin:14px auto 0;max-width:46ch;line-height:1.6;color:#54505F;font-size:16px}
+.attesa-team .bottone{margin-top:24px;position:relative;z-index:1}
+
 /* ── ritratto del team ── */
 .ritratto-team{margin-top:clamp(32px,4.5vh,52px);position:relative;border-radius:12px;overflow:hidden;
   background:linear-gradient(150deg,#DFE3E9,#C9CFD8)}
@@ -728,12 +739,13 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
   <div class="wrap">
     <p class="occhiello rv">Le persone</p>
     <h2 class="h-sez rv">Dietro ogni numero c'è qualcuno che l'ha costruito.</h2>
-    <p class="lede rv">Ecco il nostro team.</p>
-    <figure class="ritratto-team rv">
-      <img src="assets/team.jpg" alt="Il team di Freeze Studio" width="1600" height="800"
-           onerror="this.closest('.ritratto-team').remove()">
-      <figcaption>Freeze Studio, Catania</figcaption>
-    </figure>
+    <p class="lede rv">La squadra c'è. Le foto stanno arrivando.</p>
+    <div class="attesa-team rv">
+      <p class="attesa-eti">Stay tuned</p>
+      <h3>Il nuovo shooting del team è in arrivo.</h3>
+      <p>Stiamo preparando le foto nuove di tutta la squadra e dello studio. Seguici sui social: le vedrai lì per primo.</p>
+      <a class="bottone" href="https://www.instagram.com/freezestudio.it/" target="_blank" rel="noopener">Seguici su Instagram ↗</a>
+    </div>
   </div>
 </section>
 
