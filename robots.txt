@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://antoniofreeze.github.io/freeze-studio/sitemap.xml
+Sitemap: https://freezestudio.it/sitemap.xml
