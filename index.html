@@ -442,16 +442,14 @@ footer{display:block;border-top:1px solid var(--linea);margin-top:0}
 
 /* la linea funziona su ogni schermo. Il movimento ridotto lo gestiscè il motore,
    che disegna direttamente la posa finale e non anima nulla. */
-/* sotto i 760px lo schermo si divide in due fasce: frasi ancorate in alto,
-   flusso (telefoni, dati, nomi) solo nella metà bassa — la rimappatura è in linea.js */
+/* sotto i 760px come su desktop: frasi al centro e flusso a tutta altezza,
+   che può passare dietro il testo — il velo scuro e la text-shadow tengono leggibile */
 @media (max-width:760px){
   #eroe{height:480vh}
-  .stazione.sx,.stazione.dx{align-items:flex-start}
-  .stazione.sx .col,.stazione.dx .col{margin-top:14svh}
   .stazione .col{width:min(90%,520px);padding:0;margin-inline:auto}
   .stazione.dx .col{text-align:left}
   .stazione.sx::before,.stazione.dx::before{inset:-4%;
-    background:radial-gradient(ellipse 92% 40% at 50% 24%,rgba(4,5,10,.80),rgba(4,5,10,0) 74%)}
+    background:radial-gradient(ellipse 92% 56% at 50% 50%,rgba(4,5,10,.80),rgba(4,5,10,0) 76%)}
   .lockup{gap:clamp(46px,16vw,90px);font-size:clamp(22px,7vw,42px)}
 }
 @media (max-height:560px){.cue{display:none}}

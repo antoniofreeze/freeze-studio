@@ -14,11 +14,10 @@
   const eroe=document.getElementById('eroe');
   const ridotto=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  let W=0,H=0,DPR=1,FASCIA=false;
+  let W=0,H=0,DPR=1;
   function ridimensiona(){
     DPR=Math.min(devicePixelRatio||1,2);
     W=palco.clientWidth;H=palco.clientHeight;
-    FASCIA=W<=760;
     cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
     cv.style.width=W+'px';cv.style.height=H+'px';
     semina();
@@ -163,22 +162,18 @@
     op:-1, acceso:false, visto:false
   }));
   function aggiornaFlusso(k){
-    /* in fascia il flusso muore mentre la linea si posa: sotto c'è l'H1 in arrivo */
-    const grezzo=Math.min(1,Math.max(0,(k-0.68)/0.17));
-    const posa=grezzo*grezzo*(3-2*grezzo);
     OGG.forEach(o=>{
       const u=(k-o.k0)/o.dur;
-      if(u<=-0.02||u>=1.02||(FASCIA&&posa>=1)){
+      if(u<=-0.02||u>=1.02){
         if(o.op!==0){o.op=0;o.el.style.opacity='0'}
         if(o.video&&o.acceso){o.video.pause();o.acceso=false}
         return;
       }
       const t=Math.min(1,Math.max(0,u));
-      let y=proiY(t); const sc=scalaT(t);
-      if(FASCIA)y=H*0.50+(y+H*0.06)*0.492;
+      const y=proiY(t), sc=scalaT(t);
       const x=W/2+o.lato*(W*0.075+W*0.30*sc)*o.spread;
       const dentro=Math.min(1,t/0.14), fuori=1-Math.min(1,Math.max(0,(t-0.82)/0.18));
-      const op=Math.max(0,dentro*fuori)*Math.min(1,0.25+sc*1.5)*(FASCIA?1-posa:1);
+      const op=Math.max(0,dentro*fuori)*Math.min(1,0.25+sc*1.5);
       o.el.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0) translate(-50%,-50%) scale('+(0.45+sc*0.85).toFixed(3)+')';
       if(Math.abs(op-o.op)>0.01){o.op=op;o.el.style.opacity=op.toFixed(3)}
       if(o.video){
