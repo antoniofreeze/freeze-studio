@@ -435,6 +435,8 @@ footer{display:block;border-top:1px solid var(--linea);margin-top:0}
 .piede-basso{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   padding:20px clamp(20px,4.4vw,72px);border-top:1px solid var(--linea);
   font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;color:#6E7784}
+.piede-basso a{color:inherit;text-decoration:none;transition:color .3s}
+.piede-basso a:hover{color:var(--accent)}
 @media(max-width:860px){.piede{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.piede{grid-template-columns:1fr}}
 
@@ -698,7 +700,13 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
     <p class="lede rv">I casi studio sono i progetti di cui possiamo mostrare i numeri. Il portfolio è tutto il resto: il lavoro su identità e presentazioni, i siti che abbiamo costruito, le attività che seguiamo ogni mese.</p>
 
     <p class="d-tit rv">Identità e presentazioni per i brand</p>
-    <div class="marchi" id="marchi"></div>
+    <div class="marchi" id="marchi">
+      <a class="marchio-card rv" href="brand-ecosolution.html"><img src="assets/brand/pagine/ecosolution/p1.jpg" alt="Ecosolution Italia" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Ecosolution Italia</b><em>Brand identity</em></span></a>
+      <a class="marchio-card rv" href="brand-hollywood.html"><img src="assets/brand/pagine/hollywood/p1.jpg" alt="Hollywood" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Hollywood</b><em>Rebranding</em></span></a>
+      <a class="marchio-card rv" href="brand-luz-de-mar.html"><img src="assets/brand/pagine/luz-de-mar/p1.jpg" alt="Luz de Mar" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Luz de Mar</b><em>Brand identity</em></span></a>
+      <a class="marchio-card rv" href="brand-cba.html"><img src="assets/brand/pagine/cba/p1.jpg" alt="Centro Benessere Animali" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Centro Benessere Animali</b><em>Brand identity</em></span></a>
+      <a class="marchio-card rv" href="brand-badiula.html"><img src="assets/brand/pagine/badiula/p1.jpg" alt="Badiula" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Badiula</b><em>Presentazione</em></span></a>
+    </div>
 
     <p class="d-tit rv">Alcuni dei siti che abbiamo costruito</p>
     <div class="marchi siti" id="siti"></div>
@@ -833,7 +841,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
   </div>
   <div class="wrap piede-basso">
     <span>Freeze Studio S.n.c.</span>
-    <span>P.IVA e C.F. 06230830876</span>
+    <span>P.IVA e C.F. 06230830876 · <a href="privacy.html">Privacy</a></span>
   </div>
 </footer>
 
@@ -1031,24 +1039,10 @@ $$('.firma').forEach(f=>new IntersectionObserver((es,ob)=>es.forEach(e=>{
 
 
 /* ── portfolio ── */
-const MARCHI=[
-  {f:'pagine/ecosolution/p1.jpg',n:'Ecosolution Italia',s:'Brand identity',u:'brand-ecosolution.html'},
-  {f:'pagine/hollywood/p1.jpg',n:'Hollywood',s:'Rebranding',u:'brand-hollywood.html'},
-  {f:'pagine/luz-de-mar/p1.jpg',n:'Luz de Mar',s:'Brand identity',u:'brand-luz-de-mar.html'},
-  {f:'pagine/cba/p1.jpg',n:'Centro Benessere Animali',s:'Brand identity',u:'brand-cba.html'},
-  {f:'pagine/badiula/p1.jpg',n:'Badiula',s:'Presentazione',u:'brand-badiula.html'}
-];
 const CLIENTI=['Peppe Nappa','Vogue Outlet Lentini','Ristorante Da Luigi','Gate 23 Padel Center','Badiula','Ecosolution Italia',
  'Hollywood Carlentini','Luz de Mar','Centro Benessere Animali','Agenzia Lo Faro',
  'Air Network','Electric Shop','AutoSesto','New Shanti','Skyline Catania','FM Service Group',
  'Centro Polisportivo Augusta','Salvatore Cardillo','Villa Aurelia','Elisabeth Fashion','3F Illuminazione','Quota Centonovanta','Ordine Architetti PPC Catania','AMSIC'];
-const gm=$('#marchi');
-if(gm)MARCHI.forEach(m=>{
-  const a=document.createElement('a');a.className='marchio-card rv';a.href=m.u;
-  a.innerHTML='<img src="assets/brand/'+m.f+'" alt="'+m.n+'" loading="lazy" onerror="this.closest(\'.marchio-card\').remove()">'
-    +'<span><b>'+m.n+'</b><em>'+m.s+'</em></span>';
-  gm.appendChild(a);io.observe(a);
-});
 const SITI=[
   {f:'amsic.jpg',n:'AMSIC',s:'Intermediazione rifiuti · Catania',u:'https://www.amsic.it'},
   {f:'villa-aurelia.jpg',n:'Villa Aurelia',s:'Casa vacanze · Villasmundo',u:'https://www.villaaureliaholiday.com'},
