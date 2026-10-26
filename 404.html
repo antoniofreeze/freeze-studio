@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pagina non trovata | Freeze Studio</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0D12">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Instrument+Sans:wght@400;500&family=Azeret+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/pagina.css">
+</head>
+<body>
+<a class="salta" href="#main">Vai al contenuto</a>
+<div id="cursore" aria-hidden="true"><img src="/assets/cursore.svg" alt=""></div>
+<div class="ambiente" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="marchio" href="/">freeze<i aria-hidden="true"></i>studio</a>
+    <a class="indietro" href="/">Torna alla home</a>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+  <header class="testata">
+    <div class="wrap">
+      <p class="occhiello">Errore 404</p>
+      <h1 class="h2" style="margin-top:20px">Questa pagina non c'è più.</h1>
+      <p class="lede">Il sito è stato rifatto e alcuni indirizzi sono cambiati. Riparti dalla home: i nove casi studio, il metodo e i contatti sono tutti lì.</p>
+      <p style="margin-top:28px"><a class="indietro" href="/">Vai alla home</a></p>
+    </div>
+  </header>
+</main>
+
+<footer>
+  <div class="wrap piede">
+    <div class="piede-col">
+      <span class="marchio" style="font-size:20px">freeze<i aria-hidden="true"></i>studio</span>
+      <p>Uno studio strategico che parte dal problema, non dallo strumento.</p>
+    </div>
+    <div class="piede-col">
+      <p class="piede-eti">Dove siamo</p>
+      <p>Via Livorno 3<br>95127 Catania</p>
+    </div>
+    <div class="piede-col">
+      <p class="piede-eti">Scrivici</p>
+      <p><a href="mailto:info@freezestudio.it">info@freezestudio.it</a><br><a href="tel:+390952905009">+39 095 2905009</a></p>
+    </div>
+    <div class="piede-col"><p class="piede-eti">Seguici</p>
+      <p><a href="https://www.instagram.com/freezestudio.it/" target="_blank" rel="noopener">Instagram</a><br><a href="https://www.tiktok.com/@freeze.studio" target="_blank" rel="noopener">TikTok</a><br><a href="https://www.facebook.com/profile.php?id=61574042810620" target="_blank" rel="noopener">Facebook</a><br><a href="https://www.linkedin.com/company/freezestudiomarketing/" target="_blank" rel="noopener">LinkedIn</a></p></div>
+  </div>
+  <div class="wrap piede-basso">
+    <span>Freeze Studio S.n.c.</span>
+    <span>P.IVA e C.F. 06230830876</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if(!matchMedia('(pointer:fine)').matches)return;
+  const cur=document.getElementById('cursore');if(!cur)return;
+  document.documentElement.classList.add('cursore-nostro');
+  addEventListener('pointermove',e=>{
+    cur.classList.add('acceso');
+    cur.style.transform='translate3d('+(e.clientX-11.4)+'px,'+(e.clientY-5.3)+'px,0)';
+    cur.classList.toggle('sopra',!!(e.target.closest&&e.target.closest('a,button')));
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
