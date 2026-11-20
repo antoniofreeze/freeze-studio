@@ -122,7 +122,7 @@
       const v=pulito*e;
       const mostra=decimale
         ? v.toFixed(1).replace('.',',')
-        : Math.round(v).toLocaleString('it-IT');
+        : String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
       el.textContent=pre+mostra+post;
       if(p<1)requestAnimationFrame(tick);
     })(t0);

@@ -70,7 +70,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:7
 .menu{display:flex;gap:6px;list-style:none}
 .menu a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:10px 14px;border-radius:99px;opacity:.72;transition:.3s var(--e2)}
 .menu a:hover{opacity:1;background:rgba(191,217,232,.09)}
-#prova,#portfolio,#metodo,#studio,#ecosistema,#team,#parliamone{scroll-margin-top:84px}
+#prova,#portfolio,#metodo,#studio,#ecosistema,#system,#team,#parliamone{scroll-margin-top:84px}
 .apri-menu{display:none;width:44px;height:44px;background:none;border:1px solid var(--linea);border-radius:99px;
   cursor:pointer;place-items:center;padding:0}
 .apri-menu i{display:block;width:16px;height:2.5px;border-radius:2px;background:#EDF1F7;position:relative}
@@ -250,7 +250,7 @@ html.fermo .lockup{position:static;transform:none;opacity:1;justify-content:flex
 .serv p{font-size:14.5px;line-height:1.66;color:#5A5766}
 
 /* ecosistema */
-.eco{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(11px,1.4vw,18px);margin-top:clamp(36px,5vh,60px)}
+.eco{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(11px,1.4vw,18px);margin-top:clamp(36px,5vh,60px)}
 .div{border:1px solid var(--linea);border-radius:6px;padding:clamp(24px,2.8vw,36px);display:flex;flex-direction:column;
   min-height:clamp(220px,27vh,290px);text-decoration:none;transition:.45s var(--e1);position:relative;overflow:hidden}
 .div::after{content:"";position:absolute;inset:auto 0 0 0;height:0;background:linear-gradient(180deg,transparent,rgba(246,33,136,.14));transition:height .5s var(--e2)}
@@ -266,6 +266,40 @@ html.fermo .lockup{position:static;transform:none;opacity:1;justify-content:flex
 .div .go{position:relative;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-secondary)}
 .div:hover .go{color:var(--accent)}
 .div.qui{background:rgba(246,33,136,.05);border-color:rgba(246,33,136,.3)}
+@media(min-width:1081px){
+  .eco .div{padding:clamp(18px,1.9vw,28px)}
+  .eco .div .lk{font-size:clamp(12px,1.05vw,15.5px);gap:6px}
+  .eco .div .lk .riga{gap:6px}
+  .eco .div p{font-size:13.5px}
+}
+@media(min-width:761px) and (max-width:1080px){.eco .div:last-child{grid-column:1/-1;min-height:0}}
+/* ── freeze system ── */
+.sys-logo{margin-top:22px;font-family:var(--display);font-weight:900;font-size:clamp(20px,2.2vw,30px);letter-spacing:-.04em;
+  display:flex;align-items:center;gap:10px;color:var(--inchiostro)}
+.sys-logo i{width:clamp(22px,2.4vw,34px);height:3.5px;background:var(--accent);border-radius:2px;display:block}
+.sys-logo em{font-style:normal;color:var(--accent-scuro)}
+.sys-logo + .h-sez{margin-top:14px}
+.sistemi{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,1.6vw,20px);margin-top:clamp(36px,5vh,60px)}
+.sistema{background:#fff;border:1px solid var(--linea-chiara);border-radius:12px;padding:clamp(24px,3vw,40px);
+  display:flex;flex-direction:column;transition:transform .45s var(--e1),border-color .4s,box-shadow .45s var(--e1)}
+.sistema:hover{transform:translateY(-4px);border-color:rgba(194,0,95,.45);box-shadow:0 22px 44px -30px rgba(11,13,18,.45)}
+.sistema .stato{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#5A5666;
+  display:flex;align-items:center;gap:9px}
+.sistema .stato::before{content:"";width:8px;height:8px;border-radius:99px;border:2px solid var(--accent-scuro);flex:none}
+.sistema .stato.vivo{color:var(--accent-scuro)}
+.sistema .stato.vivo::before{background:var(--accent-scuro)}
+.sistema h3{margin-top:16px;font-size:clamp(19px,2.1vw,27px);letter-spacing:-.035em;line-height:1.16}
+.sistema p:not(.stato){margin-top:13px;font-size:15px;line-height:1.66;color:#4B4956;flex:1}
+.sistema.presto{background:transparent;border:1.5px dashed rgba(11,13,18,.3)}
+.sys-link{margin-top:18px;align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-scuro);text-decoration:none;border-bottom:1px solid rgba(194,0,95,.4);padding-bottom:2px}
+.sys-link:hover{border-color:var(--accent-scuro)}
+.costruire{margin-top:clamp(30px,4.5vh,52px);padding-top:clamp(26px,3.5vh,40px);border-top:1px solid var(--linea-chiara)}
+.costruire-tit{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#5A5666}
+.costruire-voci{margin-top:18px;display:flex;flex-wrap:wrap;gap:9px}
+.costruire-voci span{border:1px solid var(--linea-chiara);border-radius:99px;padding:10px 18px;font-size:14.5px;font-weight:500;color:#33303D;background:#fff}
+.costruire .bottone{margin-top:26px}
+@media(max-width:760px){.sistemi{grid-template-columns:1fr}}
 
 
 /* ── striscia dei totali ── */
@@ -291,6 +325,7 @@ html.fermo .lockup{position:static;transform:none;opacity:1;justify-content:flex
 .spina .rami path:nth-child(2){transition-delay:.75s}
 .spina .rami path:nth-child(3){transition-delay:.95s}
 .spina .rami path:nth-child(4){transition-delay:1.15s}
+.spina .rami path:nth-child(5){transition-delay:1.35s}
 .spina .perni circle{fill:var(--accent);opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);
   transition:opacity .5s var(--e1),transform .6s var(--e1)}
 .spina.viva .perni circle{opacity:1;transform:scale(1)}
@@ -298,6 +333,7 @@ html.fermo .lockup{position:static;transform:none;opacity:1;justify-content:flex
 .spina .perni circle:nth-child(2){transition-delay:.7s}
 .spina .perni circle:nth-child(3){transition-delay:.9s}
 .spina .perni circle:nth-child(4){transition-delay:1.1s}
+.spina .perni circle:nth-child(5){transition-delay:1.3s}
 @media(max-width:1080px){.spina{display:none}}
 @media(prefers-reduced-motion:reduce){
   .spina .asse,.spina .rami path{stroke-dashoffset:0}
@@ -462,6 +498,10 @@ footer{display:block;border-top:1px solid var(--linea);margin-top:0}
   .menu a{padding:13px 12px}
   .q summary{padding-block:22px}
 }
+@media (max-width:1060px){
+  .menu{display:none}
+  .apri-menu{display:grid}
+}
 @media (max-width:1080px){
   .servizi{grid-template-columns:repeat(2,1fr)}
   .eco{grid-template-columns:repeat(2,1fr)}
@@ -521,6 +561,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <li><a href="#metodo">Metodo</a></li>
       <li><a href="#studio">Studio</a></li>
       <li><a href="#ecosistema">Ecosistema</a></li>
+      <li><a href="#system">Software</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#parliamone">Contatti</a></li>
     </ul>
@@ -534,6 +575,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
   <a href="#metodo">Metodo</a>
   <a href="#studio">Studio</a>
   <a href="#ecosistema">Ecosistema</a>
+  <a href="#system">Software</a>
   <a href="#team">Team</a>
   <a href="#parliamone">Contatti</a>
 </div>
@@ -546,12 +588,12 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
     <canvas id="tela" aria-hidden="true"></canvas>
 
     <div class="flusso" aria-hidden="true">
-      <div class="oggetto dato" data-k0=".02" data-dur=".34" data-lato="1" data-x=".95"><b>2.530.519</b><span>visualizzazioni</span></div>
+      <div class="oggetto dato" data-k0=".02" data-dur=".34" data-lato="1" data-x=".95"><b>3.081.139</b><span>visualizzazioni</span></div>
       <div class="oggetto nome" data-k0=".06" data-dur=".30" data-lato="-1" data-x="1.05">Peppe Nappa</div>
       <div class="oggetto telefono" data-k0=".09" data-dur=".42" data-lato="-1" data-x=".72"><video src="assets/eroe/e1.mp4" poster="assets/eroe/e1.jpg" muted loop playsinline preload="none"></video></div>
       <div class="oggetto dato" data-k0=".16" data-dur=".32" data-lato="1" data-x=".78"><b>+37%</b><span>vendite online</span></div>
       <div class="oggetto nome" data-k0=".22" data-dur=".30" data-lato="1" data-x="1.12">Vogue Outlet</div>
-      <div class="oggetto dato" data-k0=".27" data-dur=".33" data-lato="-1" data-x=".92"><b>929</b><span>nuovi follower</span></div>
+      <div class="oggetto dato" data-k0=".27" data-dur=".33" data-lato="-1" data-x=".92"><b>1.199</b><span>nuovi follower</span></div>
       <div class="oggetto telefono" data-k0=".31" data-dur=".42" data-lato="1" data-x=".70"><video src="assets/eroe/e2.mp4" poster="assets/eroe/e2.jpg" muted loop playsinline preload="none"></video></div>
       <div class="oggetto nome" data-k0=".37" data-dur=".30" data-lato="-1" data-x="1.06">Gate 23</div>
       <div class="oggetto dato" data-k0=".42" data-dur=".32" data-lato="1" data-x=".88"><b>+25%</b><span>coperti</span></div>
@@ -576,7 +618,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
 
     <div class="stazione centro b-rise" data-a=".86" data-b="1">
       <div class="col">
-        <h1 class="frase" data-testo="Nove casi studio. 10,7 milioni di visualizzazioni."></h1>
+        <h1 class="frase" data-testo="Nove casi studio. 11,6 milioni di visualizzazioni."></h1>
         <p class="sotto">E i numeri che contano davvero: più 37% di vendite, più 25% di coperti, un sindaco eletto.</p>
         <div class="azione"><a class="bottone" href="#prova">Guardali</a></div>
       </div>
@@ -596,10 +638,10 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
     <div class="casi" id="lista-casi"></div>
 
     <div class="totali" id="totali">
-      <div class="tot"><b class="conta" data-a="10700000" data-suf=" M" data-div="1000000" data-dec="1">0</b><span>Visualizzazioni sui progetti raccontati qui</span></div>
+      <div class="tot"><b class="conta" data-a="11600000" data-suf=" M" data-div="1000000" data-dec="1">0</b><span>Visualizzazioni sui progetti raccontati qui</span></div>
       <div class="tot"><b class="conta" data-a="9">0</b><span>Casi studio con numeri verificati</span></div>
       <div class="tot"><b class="conta" data-a="3">0</b><span>Campagne per la carica di sindaco</span></div>
-      <div class="tot"><b class="conta" data-a="4">0</b><span>Divisioni dell'ecosistema</span></div>
+      <div class="tot"><b class="conta" data-a="5">0</b><span>Divisioni dell'ecosistema</span></div>
     </div>
 
   </div>
@@ -669,12 +711,12 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <svg viewBox="0 0 1000 120" preserveAspectRatio="none">
         <line class="asse" x1="20" y1="26" x2="980" y2="26"/>
         <g class="rami">
-          <path d="M125 26 L125 104"/><path d="M375 26 L375 104"/>
-          <path d="M625 26 L625 104"/><path d="M875 26 L875 104"/>
+          <path d="M100 26 L100 104"/><path d="M300 26 L300 104"/><path d="M500 26 L500 104"/>
+          <path d="M700 26 L700 104"/><path d="M900 26 L900 104"/>
         </g>
         <g class="perni">
-          <circle cx="125" cy="26" r="7"/><circle cx="375" cy="26" r="7"/>
-          <circle cx="625" cy="26" r="7"/><circle cx="875" cy="26" r="7"/>
+          <circle cx="100" cy="26" r="7"/><circle cx="300" cy="26" r="7"/><circle cx="500" cy="26" r="7"/>
+          <circle cx="700" cy="26" r="7"/><circle cx="900" cy="26" r="7"/>
         </g>
       </svg>
     </div>
@@ -687,6 +729,46 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
         <p>Luce, gas e telefonia per aziende e privati. Prima capiamo la situazione, poi individuiamo la soluzione.</p><span class="go">Scopri il servizio</span></a>
       <a class="div rv" href="noleggio.html"><span class="lk"><span class="riga">freeze<i aria-hidden="true"></i></span><em>noleggio</em></span>
         <p>Noleggio operativo, soluzioni tecnologiche e noleggio auto a lungo termine, senza immobilizzare capitale.</p><span class="go">Scopri</span></a>
+      <a class="div rv" href="#system"><span class="lk"><span class="riga">freeze<i aria-hidden="true"></i></span><em>system</em></span>
+        <p>Software su misura e intelligenza artificiale per togliere lavoro a mano, ridurre i costi e far crescere il fatturato.</p><span class="go">Scopri</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SYSTEM ══ -->
+<section class="sez chiara" id="system">
+  <div class="wrap">
+    <p class="occhiello rv">Software e intelligenza artificiale</p>
+    <p class="sys-logo rv" aria-label="Freeze System">freeze<i aria-hidden="true"></i><em>system</em></p>
+    <h2 class="h-sez rv">Il lavoro ripetitivo lo fa il software. Le persone fanno il resto.</h2>
+    <p class="lede rv">Freeze System è la divisione dell'ecosistema che costruisce software su misura e assistenti con intelligenza artificiale. L'obiettivo è sempre lo stesso: togliere lavoro a mano, ridurre i costi e lasciare più tempo per far crescere il fatturato.</p>
+    <div class="sistemi">
+      <article class="sistema rv">
+        <p class="stato vivo">In uso ogni giorno</p>
+        <h3>Freeze System, la piattaforma</h3>
+        <p>È il gestionale con cui lavoriamo noi tutti i giorni: clienti e trattative, contratti, attività del team, calendario e pubblicazione dei social in un posto solo. La stessa base la adattiamo alle aziende che vogliono un sistema su misura.</p>
+        <a class="sys-link" href="https://freezesystem.it" target="_blank" rel="noopener">freezesystem.it ↗</a>
+      </article>
+      <article class="sistema rv">
+        <p class="stato">In sviluppo</p>
+        <h3>L'assistente che risponde al telefono e su WhatsApp</h3>
+        <p>Risponde alle chiamate e ai messaggi, raccoglie le richieste, le passa alla persona giusta e lascia tutto scritto: chi ha chiamato, cosa ha chiesto, com'è finita. Così nessuna richiesta si perde e nessuno passa la giornata al telefono.</p>
+      </article>
+      <article class="sistema rv">
+        <p class="stato">In sviluppo · M Multiservizi, Carlentini</p>
+        <h3>Un'app su misura per chi amministra condomini</h3>
+        <p>Il primo progetto costruito intorno a un'azienda: un numero unico per le segnalazioni dei condòmini gestito dall'assistente, i promemoria dei pagamenti, le presenze e i lavori del personale sotto controllo. Tutto dalla stessa app.</p>
+      </article>
+      <article class="sistema presto rv">
+        <p class="stato">Stay tuned</p>
+        <h3>Preventivatore Infissi</h3>
+        <p>Una piattaforma per chi produce e vende finestre e porte. Il commerciale costruisce il preventivo un passo alla volta, con il disegno dell'infisso e il prezzo calcolato dalle regole tecniche; il titolare aggiorna da solo listini, ricarichi e sconti. Sta arrivando: lo racconteremo qui.</p>
+      </article>
+    </div>
+    <div class="costruire rv">
+      <p class="costruire-tit">Cosa possiamo costruire per la tua azienda</p>
+      <div class="costruire-voci"><span>Gestionali e CRM su misura</span><span>Assistenti IA per telefono e chat</span><span>Preventivatori e configuratori</span><span>Automazioni tra i programmi che usi già</span><span>App per clienti e personale</span><span>Cruscotti con i numeri dell'azienda</span></div>
+      <a class="bottone" href="#parliamone">Raccontaci cosa ti fa perdere tempo</a>
     </div>
   </div>
 </section>
@@ -697,14 +779,17 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
   <div class="wrap">
     <p class="occhiello rv">Portfolio</p>
     <h2 class="h-sez rv">Non solo i nove raccontati sopra.</h2>
-    <p class="lede rv">I casi studio sono i progetti di cui possiamo mostrare i numeri. Il portfolio è tutto il resto: il lavoro su identità e presentazioni, i siti che abbiamo costruito, le attività che seguiamo ogni mese.</p>
+    <p class="lede rv">I casi studio sono i progetti di cui possiamo mostrare i numeri. Il portfolio è tutto il resto: il lavoro su identità, mascotte e presentazioni, i siti che abbiamo costruito, le attività che seguiamo ogni mese.</p>
 
-    <p class="d-tit rv">Identità e presentazioni per i brand</p>
+    <p class="d-tit rv">Identità, mascotte e presentazioni per i brand</p>
     <div class="marchi" id="marchi">
       <a class="marchio-card rv" href="brand-ecosolution.html"><img src="assets/brand/pagine/ecosolution/p1.jpg" alt="Ecosolution Italia" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Ecosolution Italia</b><em>Brand identity</em></span></a>
       <a class="marchio-card rv" href="brand-hollywood.html"><img src="assets/brand/pagine/hollywood/p1.jpg" alt="Hollywood" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Hollywood</b><em>Rebranding</em></span></a>
       <a class="marchio-card rv" href="brand-luz-de-mar.html"><img src="assets/brand/pagine/luz-de-mar/p1.jpg" alt="Luz de Mar" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Luz de Mar</b><em>Brand identity</em></span></a>
       <a class="marchio-card rv" href="brand-cba.html"><img src="assets/brand/pagine/cba/p1.jpg" alt="Centro Benessere Animali" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Centro Benessere Animali</b><em>Brand identity</em></span></a>
+      <a class="marchio-card rv" href="brand-gioseschool.html"><img src="assets/brand/pagine/gioseschool/p1.jpg" alt="GioSeSchool" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>GioSeSchool</b><em>Identità e campagna</em></span></a>
+      <a class="marchio-card rv" href="brand-pandy.html"><img src="assets/brand/pagine/pandy/p1.jpg" alt="Pandy, la mascotte di AutoSesto" loading="lazy" style="object-position:50% 8%" onerror="this.closest('.marchio-card').remove()"><span><b>Pandy · AutoSesto</b><em>Mascotte</em></span></a>
+      <a class="marchio-card rv" href="brand-luigi-jr.html"><img src="assets/brand/pagine/luigi-jr/p1.jpg" alt="Luigi Jr, la mascotte di Electric Shop" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Luigi Jr · Electric Shop</b><em>Mascotte</em></span></a>
       <a class="marchio-card rv" href="brand-badiula.html"><img src="assets/brand/pagine/badiula/p1.jpg" alt="Badiula" loading="lazy" onerror="this.closest('.marchio-card').remove()"><span><b>Badiula</b><em>Presentazione</em></span></a>
     </div>
 
@@ -762,7 +847,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
       <img src="assets/progetti/oappct/copertina.jpg" alt="L'app dell'Ordine degli Architetti di Catania su un telefono" width="1080" height="675" loading="lazy">
     </div>
 
-    <p class="d-tit rv">Con chi lavoriamo</p>
+    <p class="d-tit rv">I clienti che ci hanno scelto</p>
     <div class="clienti rv" id="clienti"></div>
 
   </div>
@@ -836,7 +921,7 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
     <div class="piede-col">
       <p class="piede-eti">L'ecosistema</p>
       <p><a href="#studio">Studio</a><br><a href="https://www.freezeformazione.it" target="_blank" rel="noopener">Formazione</a><br>
-         <a href="utility.html">Utility</a><br><a href="noleggio.html">Noleggio</a></p>
+         <a href="utility.html">Utility</a><br><a href="noleggio.html">Noleggio</a><br><a href="#system">System</a></p>
     </div>
   </div>
   <div class="wrap piede-basso">
@@ -855,12 +940,12 @@ const CASI=[
       ["Produzione","Contenuti continuativi, shooting sui momenti dell'anno e format costruiti sulle persone. Su questa base sono nati due servizi: la Cambusa, la spesa consegnata in barca e raccontata a Brucoli con chi la barca ce l'ha davvero, e il catering, portato sul mercato anche con eventi in partnership con altre attività di Augusta."],
       ["Risultato","Oltre 714.000 visualizzazioni e 375 nuovi follower. Sul piano commerciale il cliente riferisce chiamate in arrivo per il catering, oggi servizio attivo, e richieste generate dai contenuti dedicati alla Cambusa."],
       ["Lezione","Il lavoro non è stato pubblicare più offerte. È stato cambiare la domanda a cui la pagina rispondeva, da quanto costa a di chi mi fido."]]},
- {id:"02-vogue-outlet",cliente:"Vogue Outlet",tit:"Le persone vendono i vestiti",kpi:"2.530.519",kpiL:"visualizzazioni in 16 mesi",settore:"Abbigliamento donna",periodo:"10 apr 2025 / 18 ago 2026",canali:"Instagram, Facebook",fonte:"Meta Business Suite e dati del cliente",notaFoto:"Il feed di Vogue Outlet Lentini",
-  dati:[["+37%","Vendite online"],["2.530.519","Visualizzazioni"],["9.059","Interazioni"],["929","Nuovi follower"]],
+ {id:"02-vogue-outlet",cliente:"Vogue Outlet",tit:"Le persone vendono i vestiti",kpi:"3.081.139",kpiL:"visualizzazioni in 19 mesi",settore:"Abbigliamento donna",periodo:"10 apr 2025 / 19 nov 2026",canali:"Instagram, Facebook",fonte:"Meta Business Suite e dati del cliente",notaFoto:"Il feed di Vogue Outlet Lentini",
+  dati:[["+37%","Vendite online"],["3.081.139","Visualizzazioni"],["13.131","Interazioni"],["1.199","Nuovi follower"]],
   cap:[["Problema","Un outlet di abbigliamento donna con brand importanti in assortimento. Il valore in negozio c'era già. Il punto è che un outlet vive di rotazione e di fiducia: la merce cambia in continuazione, e una cliente deve sapere cosa e arrivato e come le sta addosso prima ancora di entrare."],
       ["Strategia","Smettere di mostrare i capi e iniziare a mostrare le persone che li indossano. Un capo appeso comunica un prezzo, un capo indossato comunica come stara a te. Volti ricorrenti, video come standard, e contenuti che rispondono alla domanda vera: cosa mi metto."],
       ["Produzione","Video con Federica, il volto di influencer marketing dell'attività, che prova i capi e ne mostra vestibilità e resa reale. Video parlati con Adriano, che lavora in negozio e i capi li conosce. Format di outfit costruiti per occasione, con un ritmo alto come richiede un assortimento che cambia di continuo."],
-      ["Risultato","Oltre 2,5 milioni di visualizzazioni e, soprattutto, più 37% di vendite online. Il profilo riceve richieste continue sui capi in messaggio diretto. L'analisi per contenuto conferma la scelta: in 90 giorni i reel hanno generato in media 6,5 volte le visualizzazioni delle foto, e i primi quindici contenuti erano tutti reel."],
+      ["Risultato","Oltre 3 milioni di visualizzazioni e, soprattutto, più 37% di vendite online. Il profilo riceve richieste continue sui capi in messaggio diretto. L'analisi per contenuto conferma la scelta: in 90 giorni i reel hanno generato in media 6,5 volte le visualizzazioni delle foto, e i primi quindici contenuti erano tutti reel."],
       ["Lezione","In un outlet non si vende il capo. Si vende la fiducia che quel capo, addosso, funzioni. Il tessuto e il movimento una foto non li può dare."]]},
  {id:"07-da-luigi",cliente:"Ristorante Da Luigi",tit:"Pulito",kpi:"+25%",kpiL:"coperti nei giorni deboli",settore:"Ristorazione",periodo:"6 ott 2025 / 16 ago 2026",canali:"Instagram, TikTok",fonte:"Meta, TikTok e dati del cliente",
   dati:[["+25%","Coperti giorni deboli"],["976.800","Visualizzazioni"],["57.965","Interazioni"],["3.328","Nuovi follower"]],
@@ -876,12 +961,12 @@ const CASI=[
       ["Produzione","Racconto continuativo delle squadre agonistiche, formazioni maschili e femminili con risultati importanti fino alla Serie C e alla Serie B, e copertura degli eventi ospitati: tornei TPRA, nazionali e internazionali, trattati come eventi di comunicazione e non come notizie interne."],
       ["Risultato","Oltre 800.000 visualizzazioni in due anni. Ma il risultato più significativo non è social: Gate 23 ha costruito partnership commerciali con brand del settore padel, racchette, borsoni, attrezzatura, e continua a ospitare tornei nazionali e internazionali."],
       ["Lezione","In uno sport di club l'audience non la fa il campo, la fa il calendario. E la conferma del posizionamento non arriva dai follower, arriva dalle partnership."]]},
- {id:"08-badiula",cliente:"Badiula",tit:"Luxury siciliano",kpi:"314.560",kpiL:"visualizzazioni in 2 mesi e mezzo",settore:"Agriturismo",periodo:"3 giu / 18 ago 2026",canali:"Facebook, Instagram",fonte:"Meta Business Suite",
-  dati:[["314.560","Visualizzazioni"],["2.270","Interazioni"],["14.212","Visite ai profili"],["414","Nuovi follower"]],
+ {id:"08-badiula",cliente:"Badiula",tit:"Luxury siciliano",kpi:"653.811",kpiL:"visualizzazioni in 5 mesi e mezzo",settore:"Agriturismo",periodo:"3 giu / 19 nov 2026",canali:"Facebook, Instagram",fonte:"Meta Business Suite",
+  dati:[["653.811","Visualizzazioni"],["6.064","Interazioni"],["27.405","Visite ai profili"],["952","Nuovi follower"]],
   cap:[["Problema","Badiula ha cambiato pelle: ristrutturazione completa, camere nuove, sala congressi, e un'identità costruita sul rustico siciliano, il terreno, l'agrumeto, il turismo esperienziale, una cucina siciliana con tocchi da bistrot. Il posizionamento reale era salito, la comunicazione no."],
       ["Strategia","Allineare la percezione a quello che la struttura era diventata: coerenza visiva su tutto il feed, profondità storica per non far sembrare il riposizionamento nato ieri, e apertura all'estero, perché in alta stagione il cliente non è solo italiano."],
       ["Produzione","Shooting dedicato al luxury siciliano. Caroselli costruiti recuperando l'archivio fotografico della struttura. E i video parlati, introdotti per la prima volta su questi canali: il racconto in prima persona, dosato e mai celebrativo. Sottotitoli in inglese e descrizioni bilingui su tutti i contenuti."],
-      ["Risultato","Oltre 314.000 visualizzazioni in meno di tre mesi, tutte in organico, e l'introduzione del formato che ha reso di più, al punto da definire il piano successivo: un reel a settimana."],
+      ["Risultato","Oltre 650.000 visualizzazioni in cinque mesi e mezzo, e l'introduzione del formato che ha reso di più, al punto da definire il piano successivo: un reel a settimana."],
       ["Lezione","Il lusso non si dichiara. Lo costruisce la coerenza di tutto quello che si vede. E la storia non va inventata quando serve, va trovata."]]},
  {id:"04-pupillo",cliente:"Enzo Pupillo",tit:"Due mesi per arrivare a tutta la città",kpi:"Eletto",kpiL:"sindaco di Lentini",settore:"Comunicazione politica",periodo:"apr / mag 2026",canali:"Facebook, Instagram, TikTok",fonte:"Meta, TikTok e risultati elettorali pubblici",
   dati:[["Eletto","Sindaco di Lentini"],["1.381.010","Visualizzazioni"],["43.174","Interazioni"],["3.312","Nuovi follower"]],
@@ -1042,13 +1127,20 @@ $$('.firma').forEach(f=>new IntersectionObserver((es,ob)=>es.forEach(e=>{
 const CLIENTI=['Peppe Nappa','Vogue Outlet Lentini','Ristorante Da Luigi','Gate 23 Padel Center','Badiula','Ecosolution Italia',
  'Hollywood Carlentini','Luz de Mar','Centro Benessere Animali','Agenzia Lo Faro',
  'Air Network','Electric Shop','AutoSesto','New Shanti','Skyline Catania','FM Service Group',
- 'Centro Polisportivo Augusta','Salvatore Cardillo','Villa Aurelia','Elisabeth Fashion','3F Illuminazione','Quota Centonovanta','Ordine Architetti PPC Catania','AMSIC'];
+ 'Centro Polisportivo Augusta','Salvatore Cardillo','Villa Aurelia','Elisabeth Fashion','3F Illuminazione','Quota Centonovanta','Ordine Architetti PPC Catania','AMSIC',
+ 'So.Ge.Pa.','Condurso Infissi','GioSeSchool','IP Formazione e Consulenza','M Multiservizi','Metal Plastix',
+ 'Vittoria Gym','FitNutrition','Nello Raciti','FASTED Sicilia'];
 const SITI=[
   {f:'amsic.jpg',n:'AMSIC',s:'Intermediazione rifiuti · Catania',u:'https://www.amsic.it'},
+  {f:'sogepa.jpg',n:'So.Ge.Pa.',s:'Pulizie e facility · Catania',u:'https://www.sogepasnc.com'},
+  {f:'condurso.jpg',n:'Condurso Infissi',s:'Infissi e serramenti · Lentini',u:'https://www.condursoinfissi.it'},
+  {f:'isola.jpg',n:'ISOLA Finestre e Porte',s:'Finestre e porte · Lentini',u:'https://www.isolafinestreporte.it'},
+  {f:'cardillo.jpg',n:'Salvatore Cardillo',s:'Immobiliare · Sicilia orientale',u:'https://salvatorecardillo.it'},
+  {f:'ipform.jpg',n:'Ipform',s:'Formazione e consulenza',u:'https://ipform.it'},
   {f:'villa-aurelia.jpg',n:'Villa Aurelia',s:'Casa vacanze · Villasmundo',u:'https://www.villaaureliaholiday.com'},
   {f:'polisportivo-augusta.jpg',n:'Centro Polisportivo Augusta',s:'Sport e benessere · Augusta',u:'https://centropolisportivoaugusta.it'},
   {f:'elisabeth-fashion.jpg',n:'Elisabeth Fashion',s:'E-commerce moda · Aci Catena',u:'https://elisabethfashion.com'},
-  {f:'3f-illuminazione.jpg',n:'3F Illuminazione',s:'Illuminotecnica · Misterbianco',u:'https://www.3filluminazione.com'},
+  {f:'3f-illuminazione.jpg',n:'3F Illuminazione',s:'Illuminotecnica · Misterbianco',u:'https://antoniofreeze.github.io/3f-sito/'},
   {f:'cultura.jpg',n:'CULTURA',s:'Rete editoriale · culturahub.it',u:'https://culturahub.it'},
   {f:'katowice.jpg',n:'World Cup Katowice Internationals',s:'Evento internazionale · Polonia',u:'https://worldcupkatowiceinternationals.eu'}
 ];
