@@ -279,6 +279,18 @@ html.fermo .lockup{position:static;transform:none;opacity:1;justify-content:flex
 .sys-logo i{width:clamp(22px,2.4vw,34px);height:3.5px;background:var(--accent);border-radius:2px;display:block}
 .sys-logo em{font-style:normal;color:var(--accent-scuro)}
 .sys-logo + .h-sez{margin-top:14px}
+.sys-testa{display:grid;grid-template-columns:1fr minmax(200px,300px);gap:clamp(20px,4vw,60px);align-items:end}
+.sys-vai{margin-top:28px}
+.sys-frizi{position:relative;margin:0;justify-self:center;text-align:center}
+.sys-frizi::before{content:"";position:absolute;left:50%;top:46%;width:118%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(246,33,136,.30),rgba(246,33,136,.10) 55%,transparent);pointer-events:none}
+.sys-frizi img{position:relative;display:block;width:100%;height:auto;max-height:440px;object-fit:contain;
+  filter:drop-shadow(0 22px 26px rgba(11,13,18,.28));animation:frizi-su 5.5s ease-in-out infinite}
+.sys-frizi figcaption{position:relative;margin-top:12px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent-scuro)}
+@keyframes frizi-su{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.sys-frizi img{animation:none}}
+@media(max-width:760px){.sys-testa{grid-template-columns:1fr}.sys-frizi{order:-1;width:min(52%,210px);margin-bottom:6px}}
 .sistemi{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,1.6vw,20px);margin-top:clamp(36px,5vh,60px)}
 .sistema{background:#fff;border:1px solid var(--linea-chiara);border-radius:12px;padding:clamp(24px,3vw,40px);
   display:flex;flex-direction:column;transition:transform .45s var(--e1),border-color .4s,box-shadow .45s var(--e1)}
@@ -738,10 +750,19 @@ body.pausa *,body.pausa *::before,body.pausa *::after{animation-play-state:pause
 <!-- ══ SYSTEM ══ -->
 <section class="sez chiara" id="system">
   <div class="wrap">
-    <p class="occhiello rv">Software e intelligenza artificiale</p>
-    <p class="sys-logo rv" aria-label="Freeze System">freeze<i aria-hidden="true"></i><em>system</em></p>
-    <h2 class="h-sez rv">Il lavoro ripetitivo lo fa il software. Le persone fanno il resto.</h2>
-    <p class="lede rv">Freeze System è la divisione dell'ecosistema che costruisce software su misura e assistenti con intelligenza artificiale. L'obiettivo è sempre lo stesso: togliere lavoro a mano, ridurre i costi e lasciare più tempo per far crescere il fatturato.</p>
+    <div class="sys-testa">
+      <div>
+        <p class="occhiello rv">Software e intelligenza artificiale</p>
+        <p class="sys-logo rv" aria-label="Freeze System">freeze<i aria-hidden="true"></i><em>system</em></p>
+        <h2 class="h-sez rv">Il lavoro ripetitivo lo fa il software. Le persone fanno il resto.</h2>
+        <p class="lede rv">Freeze System è la divisione dell'ecosistema che costruisce software su misura e assistenti con intelligenza artificiale. L'obiettivo è sempre lo stesso: togliere lavoro a mano, ridurre i costi e lasciare più tempo per far crescere il fatturato.</p>
+        <a class="bottone rv sys-vai" href="https://www.freezesystem.it" target="_blank" rel="noopener">Vai al sito di Freeze System ↗</a>
+      </div>
+      <figure class="sys-frizi rv">
+        <img src="assets/system/frizi.webp" alt="Frìzi, il robottino di Freeze System, che saluta" width="511" height="900" loading="lazy">
+        <figcaption>Lui è Frìzi</figcaption>
+      </figure>
+    </div>
     <div class="sistemi">
       <article class="sistema rv">
         <p class="stato vivo">In uso ogni giorno</p>
